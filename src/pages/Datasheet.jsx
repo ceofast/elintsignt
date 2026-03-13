@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { C, glow, forceColor } from "../theme";
+import { C, FONT, MONO, glow, forceColor } from "../theme";
 import { Panel, Badge, ForceTag } from "../components";
 
 const productDB = [
   { id:"koral", name:"KORAL (Kara SOJ)", producer:"ASELSAN", force:"hava", status:"Envanterde", statusColor: C.green,
-    type:"Kara Konuslu Radar ES/EA", img:"📡",
+    type:"Kara Konuşlu Radar ES/EA", img:"📡",
     summary:"Türkiye'nin amiral gemisi kara konuslu stand-off jammer sistemi. Temmuz 2009'da başlayan proje kapsamında geliştirilen KORAL, Şubat 2016'da Hava Kuvvetleri envanterine girmiştir. DRFM mimarisi sayesinde düşman radar sinyallerini yakalayıp sahte hedef, hız kayması ve mesafe hataları üretebilir. Suriye Bahar Kalkanı Harekâtı'nda (2020) Rus yapımı Pantsir-S1 sistemlerini başarıyla karıştırarak Türk İHA'larının etkili operasyonlar yürütmesini sağlamış, Libya'da da muharebe kanıtlanmıştır. Fas'a 50,7 milyon dolarlık ihracat sözleşmesiyle ilk uluslararası müşterisine ulaşmıştır.",
     specs:[
       {k:"Proje Başlangıcı",v:"Temmuz 2009"},{k:"Envanter Girişi",v:"Şubat 2016 (HvKK)"},{k:"Üretilen Adet",v:"5 sistem (ilk parti)"},{k:"Konfigürasyon",v:"4x Radar ES aracı + 1x Radar EA aracı"},{k:"Platform",v:"8x8 taktik tekerlekli araç (her biri)"},{k:"Araçlar Arası Mesafe",v:"500 metreye kadar konuşlanabilir"},{k:"Frekans Aralığı",v:"0,5 – 18 GHz (VHF, UHF, L, S, C, X bantları)"},{k:"Etkin Menzil",v:"150–200+ km"},{k:"Operasyonel İrtifa",v:"12.000 metreye kadar"},{k:"Anten Teknolojisi",v:"Faz dizili anten (Phased Array)"},{k:"Karıştırma Teknolojisi",v:"DRFM tabanlı (baraj, nokta, tarama, aldatma)"},{k:"Kanal Başı Karıştırma Gücü",v:"50 Watt"},{k:"Operatör",v:"2 operatör + 1 amir (Operasyon Kontrol Birimi)"},{k:"NBC Koruma",v:"Evet (NATO standart)"},{k:"Çalışma Sıcaklığı",v:"-30°C — +50°C"},{k:"Nem Oranı",v:"%95'e kadar"},{k:"Standartlar",v:"MIL-STD-810F, MIL-STD-461E/464A"},{k:"İhracat",v:"Fas (50,7 milyon USD)"},{k:"Muharebe Kanıtı",v:"Bahar Kalkanı 2020 (Pantsir-S1), Libya"},
@@ -12,13 +12,13 @@ const productDB = [
     scenarios:["SEAD/DEAD","Konvansiyonel Savaş","Hava Savunma Baskılama","İHA Operasyon Desteği","EOB Haritalama","Sınır Güvenliği","İhracat"],
   },
   { id:"koral100", name:"KORAL 100 (Modernize)", producer:"ASELSAN", force:"hava", status:"Envanterde", statusColor: C.green,
-    type:"Kara Konuslu Radar ES/EA (Modernize)", img:"📡",
+    type:"Kara Konuşlu Radar ES/EA (Modernize)", img:"📡",
     summary:"KORAL'ın modernize versiyonu olup Eylül 2025'te geliştirmesi tamamlanarak TSK'ya teslim edilmiştir. AESA (Aktif Elektronik Taramalı Dizi) anten teknolojisine geçişle birlikte daha geniş frekans kapsamı, artırılmış çıkış gücü ve birden fazla hedefe eş zamanlı karıştırma/aldatma yeteneği kazanmıştır. Gelişmiş LPI (Düşük Yakalama Olasılıklı) radar tespiti ve daha hızlı tepki süresiyle modern tehditlere karşı etkinliği önemli ölçüde artırılmıştır. Çelik Kubbe çok katmanlı hava savunma mimarisine entegre edilmiştir.",
     specs:[{k:"Baz Sistem",v:"KORAL"},{k:"Modernizasyon Tamamlanma",v:"Eylül 2025"},{k:"Anten Tipi",v:"AESA (Aktif Elektronik Taramalı Dizi)"},{k:"Frekans Kapsamı",v:"Orijinal KORAL'a göre genişletilmiş bant genişliği"},{k:"Çıkış Gücü",v:"Orijinal KORAL'a göre artırılmış"},{k:"Eş Zamanlı Hedef",v:"Birden fazla hedefe eş zamanlı karıştırma/aldatma"},{k:"LPI Tespiti",v:"Düşük yakalama olasılıklı radarlara karşı gelişmiş tespit"},{k:"Reaksiyon Süresi",v:"Daha hızlı tepki süresi"},{k:"Entegrasyon",v:"Çelik Kubbe çok katmanlı hava savunma sistemi"},{k:"Platform",v:"8x8 taktik tekerlekli araç"},{k:"NATO Uyumluluğu",v:"Evet"}],
     scenarios:["SEAD/DEAD","Konvansiyonel Savaş","Hava Savunma Baskılama","Çelik Kubbe Entegrasyonu","LPI Radar Tespiti"],
   },
   { id:"koral200", name:"KORAL 200 (Yeni Nesil)", producer:"ASELSAN", force:"hava", status:"Üretimde", statusColor: C.cyan,
-    type:"Kara Konuslu Radar ES/EA (Yeni Nesil)", img:"📡",
+    type:"Kara Konuşlu Radar ES/EA (Yeni Nesil)", img:"📡",
     summary:"ASELSAN'ın yeni nesil mobil radar elektronik harp sistemi olup IDEF 2023'te maket, IDEF 2025'te (Temmuz 2025) ilk kez ürün olarak tanıtılmıştır. Orijinal KORAL'a kıyasla yaklaşık 2 kat güç artışı sunan sistem, ED ve EA yeteneklerini tek bir modüler platformda birleştirmektedir. ASELSAN Genel Müdürü Ahmet Akyol'un ifadesiyle İHA ve savaş uçakları için 'elektronik otoyol' açma kapasitesine sahiptir. Görev Planlama Aracı ile operasyon öncesi tehdit modelleme, Görev Analiz Aracı ile operasyon sonrası değerlendirme yapabilir. Çelik Kubbe mimarisine dahil edilen beşinci yeni sistemdir.",
     specs:[{k:"İlk Sergileme",v:"IDEF 2023 (maket)"},{k:"Ürün Tanıtımı",v:"IDEF 2025 (Temmuz 2025)"},{k:"Güç Artışı",v:"~2x (orijinal KORAL'a göre)"},{k:"Mimari",v:"ED + EA tek modüler platformda"},{k:"ED Alt Sistemi",v:"Çoklu alıcı mimarisi, geniş anlık bant genişliği"},{k:"Yön Bulma",v:"Yüksek hassasiyetli yön bulma, düşük CEP"},{k:"Tespit Yeteneği",v:"CW, LPI ve yoğun PRF ortamlarında etkin"},{k:"EA Alt Sistemi",v:"Dijital entegre, faz dizili antenler, yüksek çıkış gücü"},{k:"DRFM",v:"Sahte hedef, hız kayması, mesafe hatası üretimi"},{k:"Görev Planlama",v:"Operasyon öncesi konfigürasyon ve tehdit modelleme aracı"},{k:"Görev Analiz",v:"Operasyon sonrası kapsamlı analiz aracı"},{k:"Kontrol",v:"3 adet NATO uyumlu operatör konsolu"},{k:"NBC Koruma",v:"Evet"},{k:"Entegrasyon",v:"Çelik Kubbe hava savunma mimarisi"}],
     scenarios:["SEAD/DEAD","Konvansiyonel Savaş","Hava Savunma Baskılama","Elektronik Otoyol/Koridor Açma","Çelik Kubbe Entegrasyonu","İhracat"],
@@ -404,63 +404,63 @@ export default function Datasheet() {
   const sel = dsSelected !== null ? productDB.find(p => p.id === dsSelected) : null;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10, animation: "fadeUp 0.35s ease-out" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 14, animation: "fadeUp 0.35s ease-out" }}>
       <Panel glow={C.cyan} noPad>
-        <div style={{ padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ fontSize: 16, color: C.cyan }}>{"⊞"}</span>
+        <div style={{ padding: "14px 18px", display: "flex", alignItems: "center", gap: 12 }}>
+          <span style={{ fontSize: 18, color: C.cyan }}>{"⊞"}</span>
           <div style={{ flex: 1, position: "relative" }}>
             <input
               type="text" value={dsSearch} onChange={e => { setDsSearch(e.target.value); setDsSelected(null); }}
-              placeholder="Ürün ara... (isim, uretici, tip, özellik, senaryo)"
-              style={{ width: "100%", padding: "8px 12px 8px 30px", background: C.bg2, border: `1px solid ${C.border}`, borderRadius: 3, color: C.white, fontSize: 11, fontFamily: "monospace", outline: "none", boxSizing: "border-box" }}
+              placeholder="Ürün ara... (isim, üretici, tip, özellik, senaryo)"
+              style={{ width: "100%", padding: "10px 14px 10px 34px", background: C.bg2, border: `1px solid ${C.border}`, borderRadius: 6, color: C.white, fontSize: 13, fontFamily: FONT, outline: "none", boxSizing: "border-box" }}
               onFocus={e => e.target.style.borderColor = C.cyan} onBlur={e => e.target.style.borderColor = C.border}
             />
-            <span style={{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", fontSize: 12, color: C.textDim }}>{"🔍"}</span>
+            <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", fontSize: 14, color: C.textDim }}>{"🔍"}</span>
           </div>
-          <span style={{ fontSize: 10, color: C.textDim, fontFamily: "monospace", whiteSpace: "nowrap" }}>{filtered.length} / {productDB.length}</span>
+          <span style={{ fontSize: 12, color: C.textDim, fontFamily: MONO, whiteSpace: "nowrap" }}>{filtered.length} / {productDB.length}</span>
         </div>
       </Panel>
 
-      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", padding: "0 2px" }}>
-        {[{l:"TUMU",v:"",c:C.cyan},{l:"HAVA",v:"hava",c:C.hava},{l:"KARA",v:"kara",c:C.kara},{l:"DENİZ",v:"deniz",c:C.deniz},{l:"AR-GE",v:"arge",c:C.arge}].map((f,i) => (
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", padding: "0 2px" }}>
+        {[{l:"TÜMÜ",v:"",c:C.cyan},{l:"HAVA",v:"hava",c:C.hava},{l:"KARA",v:"kara",c:C.kara},{l:"DENİZ",v:"deniz",c:C.deniz},{l:"AR-GE",v:"arge",c:C.arge}].map((f,i) => (
           <button key={i} onClick={() => { setDsForce(f.v); setDsSelected(null); }} style={{
-            padding: "3px 10px", borderRadius: 2, fontSize: 8, fontWeight: 700, cursor: "pointer",
-            fontFamily: "monospace", letterSpacing: 0.5, transition: "all 0.15s",
+            padding: "5px 14px", borderRadius: 6, fontSize: 12, fontWeight: 700, cursor: "pointer",
+            fontFamily: FONT, letterSpacing: 0.8, transition: "all 0.15s",
             border: dsForce === f.v ? `1px solid ${f.c}` : `1px solid ${C.border}`,
-            background: dsForce === f.v ? `${f.c}18` : "transparent",
+            background: dsForce === f.v ? `${f.c}20` : C.bg2,
             color: dsForce === f.v ? f.c : C.textDim,
           }}>{f.l}</button>
         ))}
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: sel ? "300px 1fr" : "1fr", gap: 10, minHeight: 500 }}>
-        <Panel title="ÜRÜN LİSTESİ" sub={dsSearch || dsForce ? `${dsForce ? dsForce.toUpperCase() : "TUMU"}${dsSearch ? ` · "${dsSearch}"` : ""}` : `${productDB.length} sistem`} glow={C.cyan} noPad>
+      <div style={{ display: "grid", gridTemplateColumns: sel ? "320px 1fr" : "1fr", gap: 14, minHeight: 500 }}>
+        <Panel title="ÜRÜN LİSTESİ" sub={dsSearch || dsForce ? `${dsForce ? dsForce.toUpperCase() : "TÜMÜ"}${dsSearch ? ` · "${dsSearch}"` : ""}` : `${productDB.length} sistem`} glow={C.cyan} noPad>
           <div style={{ padding: 0, maxHeight: sel ? 620 : 700, overflowY: "auto" }}>
             {filtered.length === 0 ? (
-              <div style={{ padding: 20, textAlign: "center", color: C.textDim, fontSize: 11 }}>
-                <div style={{ fontSize: 20, marginBottom: 6 }}>{"🔍"}</div>
-                Sonuc bulunamadi
+              <div style={{ padding: 24, textAlign: "center", color: C.textDim, fontSize: 13, fontFamily: FONT }}>
+                <div style={{ fontSize: 24, marginBottom: 8 }}>{"🔍"}</div>
+                Sonuç bulunamadı
               </div>
             ) : filtered.map((p) => (
               <div key={p.id} onClick={() => setDsSelected(dsSelected === p.id ? null : p.id)}
                 className="hov"
                 style={{
-                  padding: "8px 12px", cursor: "pointer", transition: "all 0.15s",
+                  padding: "10px 14px", cursor: "pointer", transition: "all 0.15s",
                   borderBottom: `1px solid ${C.border}`, borderLeft: `3px solid ${dsSelected === p.id ? forceColor(p.force) : "transparent"}`,
                   background: dsSelected === p.id ? C.panelHi : "transparent",
                 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ fontSize: 18, minWidth: 24, textAlign: "center" }}>{p.img}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ fontSize: 20, minWidth: 26, textAlign: "center" }}>{p.img}</span>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 5, flexWrap: "wrap" }}>
-                      <span style={{ fontSize: 10, fontWeight: 800, color: C.white }}>{p.name}</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: C.white, fontFamily: FONT }}>{p.name}</span>
                       <ForceTag force={p.force} />
                     </div>
-                    <div style={{ fontSize: 8, color: C.textDim, marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.type} — {p.producer}</div>
+                    <div style={{ fontSize: 11, color: C.textDim, marginTop: 2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: FONT }}>{p.type} — {p.producer}</div>
                   </div>
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2 }}>
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: p.statusColor, boxShadow: glow(p.statusColor, 6) }} />
-                    <span style={{ fontSize: 7, color: C.textDim }}>{p.status.split(" ")[0]}</span>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 3 }}>
+                    <div style={{ width: 7, height: 7, borderRadius: "50%", background: p.statusColor, boxShadow: glow(p.statusColor, 6) }} />
+                    <span style={{ fontSize: 10, color: C.textDim, fontFamily: FONT }}>{p.status.split(" ")[0]}</span>
                   </div>
                 </div>
               </div>
@@ -470,46 +470,46 @@ export default function Datasheet() {
 
         {sel && (
           <Panel title={`${sel.img} ${sel.name}`} sub={sel.type} glow={forceColor(sel.force)} noPad>
-            <div style={{ padding: 14, maxHeight: 620, overflowY: "auto" }}>
-              <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginBottom: 12 }}>
+            <div style={{ padding: 18, maxHeight: 620, overflowY: "auto" }}>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 14 }}>
                 <Badge color={forceColor(sel.force)}>{sel.force === "arge" ? "AR-GE" : sel.force.toUpperCase()}</Badge>
-                <span style={{ fontSize: 9, padding: "1px 7px", borderRadius: 2, fontWeight: 700, color: C.white, background: sel.statusColor, fontFamily: "monospace" }}>{sel.status}</span>
-                <span style={{ fontSize: 9, padding: "1px 7px", borderRadius: 2, fontWeight: 600, color: C.textDim, border: `1px solid ${C.border}`, fontFamily: "monospace" }}>{sel.producer}</span>
+                <span style={{ fontSize: 11, padding: "3px 10px", borderRadius: 4, fontWeight: 700, color: C.white, background: sel.statusColor, fontFamily: FONT }}>{sel.status}</span>
+                <span style={{ fontSize: 11, padding: "3px 10px", borderRadius: 4, fontWeight: 600, color: C.textDim, border: `1px solid ${C.border}`, fontFamily: FONT }}>{sel.producer}</span>
               </div>
 
-              <div style={{ background: C.bg2, borderRadius: 3, padding: "10px 12px", marginBottom: 12, border: `1px solid ${C.border}` }}>
-                <div style={{ fontSize: 8, color: C.cyan, fontWeight: 700, letterSpacing: 1, marginBottom: 4 }}>{"◉"} TANIM</div>
-                <div style={{ fontSize: 10, color: C.text, lineHeight: 1.7 }}>{sel.summary}</div>
+              <div style={{ background: C.bg2, borderRadius: 6, padding: "12px 16px", marginBottom: 14, border: `1px solid ${C.borderHi}` }}>
+                <div style={{ fontSize: 11, color: C.cyan, fontWeight: 700, letterSpacing: 1.2, marginBottom: 6, fontFamily: FONT }}>{"◉"} TANIM</div>
+                <div style={{ fontSize: 13, color: C.text, lineHeight: 1.7, fontFamily: FONT }}>{sel.summary}</div>
               </div>
 
-              <div style={{ marginBottom: 12 }}>
-                <div style={{ fontSize: 8, color: C.amber, fontWeight: 700, letterSpacing: 1, marginBottom: 6, paddingLeft: 2 }}>{"◆"} TEKNİK OZELLİKLER — DATASHEET</div>
-                <div style={{ borderRadius: 3, overflow: "hidden", border: `1px solid ${C.border}` }}>
+              <div style={{ marginBottom: 14 }}>
+                <div style={{ fontSize: 11, color: C.amber, fontWeight: 700, letterSpacing: 1.2, marginBottom: 8, paddingLeft: 2, fontFamily: FONT }}>{"◆"} TEKNİK ÖZELLİKLER — DATASHEET</div>
+                <div style={{ borderRadius: 6, overflow: "hidden", border: `1px solid ${C.border}` }}>
                   {sel.specs.map((s, j) => (
                     <div key={j} style={{
-                      display: "grid", gridTemplateColumns: "140px 1fr",
+                      display: "grid", gridTemplateColumns: "160px 1fr",
                       borderBottom: j < sel.specs.length - 1 ? `1px solid ${C.border}` : "none",
                       background: j % 2 === 0 ? C.bg2 : "transparent",
                     }}>
-                      <div style={{ padding: "6px 10px", fontSize: 9, fontWeight: 700, color: C.cyan, borderRight: `1px solid ${C.border}` }}>{s.k}</div>
-                      <div style={{ padding: "6px 10px", fontSize: 9, color: C.text, lineHeight: 1.5 }}>{s.v}</div>
+                      <div style={{ padding: "7px 12px", fontSize: 12, fontWeight: 700, color: C.cyan, borderRight: `1px solid ${C.border}`, fontFamily: FONT }}>{s.k}</div>
+                      <div style={{ padding: "7px 12px", fontSize: 12, color: C.text, lineHeight: 1.6, fontFamily: FONT }}>{s.v}</div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div style={{ marginBottom: 12 }}>
-                <div style={{ fontSize: 8, color: C.green, fontWeight: 700, letterSpacing: 1, marginBottom: 6, paddingLeft: 2 }}>{"▸"} KULLANIM SENARYOLARI</div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+              <div style={{ marginBottom: 14 }}>
+                <div style={{ fontSize: 11, color: C.green, fontWeight: 700, letterSpacing: 1.2, marginBottom: 8, paddingLeft: 2, fontFamily: FONT }}>{"▸"} KULLANIM SENARYOLARI</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
                   {sel.scenarios.map((sc, j) => (
-                    <span key={j} style={{ fontSize: 8, padding: "3px 7px", background: `${C.green}10`, border: `1px solid ${C.green}25`, borderRadius: 2, color: C.text, fontWeight: 600 }}>{sc}</span>
+                    <span key={j} style={{ fontSize: 11, padding: "4px 10px", background: `${C.green}10`, border: `1px solid ${C.green}25`, borderRadius: 4, color: C.text, fontWeight: 600, fontFamily: FONT }}>{sc}</span>
                   ))}
                 </div>
               </div>
 
               <button onClick={() => setDsSelected(null)} style={{
-                marginTop: 6, width: "100%", padding: "7px", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 3,
-                color: C.textDim, fontSize: 9, fontFamily: "monospace", cursor: "pointer", fontWeight: 600, letterSpacing: 1
+                marginTop: 8, width: "100%", padding: "9px", background: "transparent", border: `1px solid ${C.border}`, borderRadius: 6,
+                color: C.textDim, fontSize: 12, fontFamily: FONT, cursor: "pointer", fontWeight: 600, letterSpacing: 1
               }}>{"✕"} KAPAT</button>
             </div>
           </Panel>
