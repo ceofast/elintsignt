@@ -1,5 +1,5 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
-import { C, ttStyle } from "../theme";
+import { C, FONT, MONO, ttStyle } from "../theme";
 import { Panel, HeatCell } from "../components";
 
 const radarScenario = [
@@ -29,39 +29,39 @@ const heatmapSystems = [
   { name: "FEWS-U", s: [1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0] },
   { name: "PUHU/KARAKULAK", s: [0,.3,.8,0,0,1,0,0,1,0,0,.5,.3,0,0,0] },
   { name: "VURAL", s: [.4,1,.3,0,0,.8,0,0,.5,.2,1,0,.4,.6,.3,0] },
-  { name: "GOKBERK", s: [0,.3,0,1,0,0,0,0,0,0,0,.8,0,0,0,0] },
+  { name: "GÖKBERK", s: [0,.3,0,1,0,0,0,0,0,0,0,.8,0,0,0,0] },
   { name: "MARLIN EW", s: [0,0,0,0,0,0,.8,.4,.5,0,0,0,.6,.7,0,0] },
 ];
 
-const heatmapScenarios = ["SEAD","Konv.","Asim.","K-İHA","K-EYP","Sınır","Deniz","D.alti","SIGINT","EP","HSB","VIP","NATO","İhraç.","Eğit.","Uzay"];
+const heatmapScenarios = ["SEAD","Konv.","Asim.","K-İHA","K-EYP","Sınır","Deniz","D.altı","SIGINT","EP","HSB","VIP","NATO","İhraç.","Eğit.","Uzay"];
 
 export default function HeatMapPage() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10, animation: "fadeUp 0.35s ease-out" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 14, animation: "fadeUp 0.35s ease-out" }}>
       <Panel title="Sistem x Senaryo Heat Map" sub="Her sistemin her senaryodaki etkinlik yoğunluğu (0-100)" glow={C.cyan}>
         <div style={{ overflowX: "auto" }}>
-          <div style={{ display: "inline-block", minWidth: 600 }}>
-            <div style={{ display: "flex", gap: 2, marginBottom: 3, paddingLeft: 100 }}>
+          <div style={{ display: "inline-block", minWidth: 650 }}>
+            <div style={{ display: "flex", gap: 3, marginBottom: 4, paddingLeft: 120 }}>
               {heatmapScenarios.map((s,i) => (
-                <div key={i} style={{ width: 28, textAlign: "center", fontSize: 7, color: C.textDim, fontWeight: 600, transform: "rotate(-45deg)", transformOrigin: "center", height: 28, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>{s}</div>
+                <div key={i} style={{ width: 32, textAlign: "center", fontSize: 9, color: C.textDim, fontWeight: 600, fontFamily: FONT, transform: "rotate(-45deg)", transformOrigin: "center", height: 32, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>{s}</div>
               ))}
             </div>
             {heatmapSystems.map((sys,i) => (
-              <div key={i} style={{ display: "flex", gap: 2, alignItems: "center", marginBottom: 2 }}>
-                <div style={{ width: 96, fontSize: 9, fontWeight: 700, color: C.white, textAlign: "right", paddingRight: 4, whiteSpace: "nowrap" }}>{sys.name}</div>
+              <div key={i} style={{ display: "flex", gap: 3, alignItems: "center", marginBottom: 3 }}>
+                <div style={{ width: 116, fontSize: 12, fontWeight: 700, color: C.white, textAlign: "right", paddingRight: 6, whiteSpace: "nowrap", fontFamily: FONT }}>{sys.name}</div>
                 {sys.s.map((v,j) => <HeatCell key={j} v={v} />)}
               </div>
             ))}
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "center", gap: 12, marginTop: 10 }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: 18, marginTop: 14 }}>
           {[
-            { l: "Düşük (1-30)", bg: "rgba(90,122,154,0.25)" },
+            { l: "Düşük (1-30)", bg: "rgba(107,141,181,0.25)" },
             { l: "Orta (31-70)", bg: "rgba(255,179,0,0.35)" },
-            { l: "Yüksek (71-100)", bg: "rgba(0,229,255,0.55)" },
+            { l: "Yüksek (71-100)", bg: "rgba(0,212,255,0.55)" },
           ].map((x,i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 9 }}>
-              <div style={{ width: 14, height: 10, background: x.bg, borderRadius: 1, border: `1px solid ${C.border}` }} />
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, fontFamily: FONT }}>
+              <div style={{ width: 16, height: 12, background: x.bg, borderRadius: 2, border: `1px solid ${C.border}` }} />
               <span style={{ color: C.textDim }}>{x.l}</span>
             </div>
           ))}
@@ -69,16 +69,16 @@ export default function HeatMapPage() {
       </Panel>
 
       <Panel title="Senaryo Bazlı Toplam Sistem Yoğunluğu" glow={C.amber}>
-        <ResponsiveContainer width="100%" height={200}>
+        <ResponsiveContainer width="100%" height={220}>
           <BarChart data={radarScenario} margin={{ left: 0, right: 10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
-            <XAxis dataKey="s" tick={{ fill: C.textDim, fontSize: 8, fontFamily: "monospace" }} stroke={C.border} />
-            <YAxis tick={{ fill: C.textDim, fontSize: 9, fontFamily: "monospace" }} stroke={C.border} />
+            <XAxis dataKey="s" tick={{ fill: C.textDim, fontSize: 12, fontFamily: "Inter, sans-serif" }} stroke={C.border} />
+            <YAxis tick={{ fill: C.textDim, fontSize: 12, fontFamily: "Inter, sans-serif" }} stroke={C.border} />
             <Tooltip contentStyle={ttStyle} />
             <Bar dataKey="kara" stackId="a" fill={C.kara} name="Kara" />
             <Bar dataKey="hava" stackId="a" fill={C.hava} name="Hava" />
             <Bar dataKey="deniz" stackId="a" fill={C.deniz} name="Deniz" radius={[3, 3, 0, 0]} />
-            <Legend wrapperStyle={{ fontSize: 9, fontFamily: "monospace" }} />
+            <Legend wrapperStyle={{ fontSize: 13, fontFamily: "Inter, sans-serif" }} />
           </BarChart>
         </ResponsiveContainer>
       </Panel>
