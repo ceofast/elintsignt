@@ -1,0 +1,11 @@
+node_modules
+dist
+.vercel
+.DS_Store
+*.local
+*.log
+article_assets
+*.docx
+create_*.py
+download_*.py
+MEDIUM_MAKALE_2.md
