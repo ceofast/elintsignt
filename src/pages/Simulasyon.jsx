@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import * as d3 from "d3";
-import { C, glow } from "../theme";
+import { C, FONT, MONO, glow } from "../theme";
 import { Panel } from "../components";
 import { turkeyBorder, neighborCountries } from "../data/turkeyGeo";
 
@@ -39,7 +39,7 @@ const MAP_SYS=[
   {id:"vural",name:"VURAL",rET:80,rED:150,color:"#4488ff"},{id:"ilgar",name:"ILGAR",rET:40,rED:0,color:"#44dd88"},
   {id:"sancak",name:"SANCAK",rET:60,rED:0,color:"#88dd44"},{id:"gergedan",name:"GERGEDAN",rET:15,rED:0,color:"#ddaa44"},
   {id:"kangal",name:"KANGAL",rET:0.5,rED:0,color:"#dd8844"},{id:"ejderha",name:"EJDERHA",rET:1,rED:0,color:"#dd44dd"},
-  {id:"gokberk",name:"GOKBERK",rET:2,rED:0,color:"#ff2222"},{id:"ihtar",name:"İHTAR",rET:8,rED:0,color:"#44dddd"},
+  {id:"gokberk",name:"GÖKBERK",rET:2,rED:0,color:"#ff2222"},{id:"ihtar",name:"İHTAR",rET:8,rED:0,color:"#44dddd"},
   {id:"bukalemun",name:"BUKALEMUN",rET:20,rED:0,color:"#aa44ff"},
 ];
 
@@ -127,22 +127,22 @@ export default function Simulasyon() {
 
   return (
     <div style={{ animation: "fadeUp 0.35s ease-out" }}>
-      <div style={{ fontSize: 8, color: C.textDim, marginBottom: 6, fontFamily: "monospace" }}>Scroll: Yakinlastir | Surukle: Kaydir | Çift tik: Sifirla | Nokta tikla: Odaklan</div>
-      <div style={{ display: "grid", gridTemplateColumns: "220px 1fr", gap: 6 }}>
+      <div style={{ fontSize: 11, color: C.textDim, marginBottom: 8, fontFamily: FONT }}>Scroll: Yakınlaştır | Sürükle: Kaydır | Çift tık: Sıfırla | Nokta tıkla: Odaklan</div>
+      <div style={{ display: "grid", gridTemplateColumns: "240px 1fr", gap: 10 }}>
         {/* Left panel */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 5, maxHeight: "70vh", overflowY: "auto" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: "70vh", overflowY: "auto" }}>
           <Panel title="İL SEÇİMİ" glow={C.cyan}>
             <input value={citySearch} onChange={e=>setCitySearch(e.target.value)} placeholder="İl ara..." style={{
-              width: "100%", padding: "4px 6px", fontSize: 8, fontFamily: "inherit", borderRadius: 2, marginBottom: 4,
+              width: "100%", padding: "6px 8px", fontSize: 11, fontFamily: FONT, borderRadius: 4, marginBottom: 6,
               border: `1px solid ${C.border}`, background: C.bg, color: C.white, outline: "none",
             }}/>
             <div style={{ maxHeight: 200, overflowY: "auto" }}>
               {(citySearch ? filteredCities : CITY_DEPS).map(d => (
                 <button key={d.id} className="hov" onClick={() => { mFocus(d); setCitySearch(""); }} style={{
-                  display: "block", width: "100%", padding: "3px 6px", marginBottom: 1, background: mapSel===d.id?`${C.cyan}15`:"transparent",
-                  border: mapSel===d.id?`1px solid ${C.cyan}`:`1px solid transparent`, borderRadius: 2, cursor: "pointer", textAlign: "left",
-                  color: mapSel===d.id?C.cyan:C.textDim, fontSize: 8, fontFamily: "inherit", fontWeight: 600
-                }}><span style={{ color: C.amber }}>{"▸"} </span>{d.name}<span style={{ float: "right", fontSize: 6, color: C.textMute }}>{d.sys.length} sys · {d.e}m</span></button>
+                  display: "block", width: "100%", padding: "4px 8px", marginBottom: 2, background: mapSel===d.id?`${C.cyan}15`:"transparent",
+                  border: mapSel===d.id?`1px solid ${C.cyan}`:`1px solid transparent`, borderRadius: 4, cursor: "pointer", textAlign: "left",
+                  color: mapSel===d.id?C.cyan:C.textDim, fontSize: 11, fontFamily: FONT, fontWeight: 600
+                }}><span style={{ color: C.amber }}>{"▸"} </span>{d.name}<span style={{ float: "right", fontSize: 9, color: C.textMute }}>{d.sys.length} sys · {d.e}m</span></button>
               ))}
             </div>
           </Panel>
@@ -151,13 +151,13 @@ export default function Simulasyon() {
               const deployed = mDep && mDep.sys.includes(s.id);
               return (
                 <button key={s.id} className="hov" onClick={() => mToggle(s.id)} onMouseEnter={() => setMapHov(s.id)} onMouseLeave={() => setMapHov(null)} style={{
-                  display: "block", width: "100%", padding: "2px 5px", marginBottom: 1, background: mapAct.has(s.id)?`${s.color}10`:"transparent",
-                  border: `1px solid ${mapAct.has(s.id)?s.color+"40":"transparent"}`, borderRadius: 2, cursor: "pointer", textAlign: "left", fontFamily: "inherit", opacity: deployed?1:0.3
+                  display: "block", width: "100%", padding: "4px 8px", marginBottom: 2, background: mapAct.has(s.id)?`${s.color}10`:"transparent",
+                  border: `1px solid ${mapAct.has(s.id)?s.color+"40":"transparent"}`, borderRadius: 4, cursor: "pointer", textAlign: "left", fontFamily: FONT, opacity: deployed?1:0.3
                 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: mapAct.has(s.id)?s.color:C.border }} />
-                    <span style={{ fontSize: 8, fontWeight: 700, color: mapAct.has(s.id)?C.white:C.textDim }}>{s.name}</span>
-                    <span style={{ fontSize: 6, color: C.textDim, marginLeft: "auto" }}>{s.rET>5?s.rET+"km":s.rET>0?Math.round(s.rET*1000)+"m":""}</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                    <div style={{ width: 7, height: 7, borderRadius: "50%", background: mapAct.has(s.id)?s.color:C.border }} />
+                    <span style={{ fontSize: 11, fontWeight: 700, color: mapAct.has(s.id)?C.white:C.textDim, fontFamily: FONT }}>{s.name}</span>
+                    <span style={{ fontSize: 9, color: C.textDim, marginLeft: "auto", fontFamily: MONO }}>{s.rET>5?s.rET+"km":s.rET>0?Math.round(s.rET*1000)+"m":""}</span>
                   </div>
                 </button>
               );
@@ -165,31 +165,31 @@ export default function Simulasyon() {
           </Panel>
           <Panel title="KONTROL" glow={C.green}>
             {[{l:"ET Menzili",v:mapET,s:setMapET,c:C.red},{l:"ED Menzili",v:mapED,s:setMapED,c:C.cyan},{l:"Topografya",v:mapTerr,s:setMapTerr,c:C.green}].map((x,i) => (
-              <button key={i} onClick={() => x.s(!x.v)} style={{ display: "block", width: "100%", padding: "2px 5px", marginBottom: 2, fontSize: 8, fontWeight: 600, fontFamily: "inherit", cursor: "pointer", textAlign: "left", borderRadius: 2, border: `1px solid ${x.v?x.c+"40":"transparent"}`, background: x.v?`${x.c}08`:"transparent", color: x.v?x.c:C.textDim }}>{x.v?"◉":"○"} {x.l}</button>
+              <button key={i} onClick={() => x.s(!x.v)} style={{ display: "block", width: "100%", padding: "4px 8px", marginBottom: 3, fontSize: 11, fontWeight: 600, fontFamily: FONT, cursor: "pointer", textAlign: "left", borderRadius: 4, border: `1px solid ${x.v?x.c+"40":"transparent"}`, background: x.v?`${x.c}08`:"transparent", color: x.v?x.c:C.textDim }}>{x.v?"◉":"○"} {x.l}</button>
             ))}
           </Panel>
           {mDep && <Panel title={`${mDep.name}`} glow={C.amber}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 3, marginBottom: 4 }}>
-              {[{l:"RAKIM",v:`${mDep.e}m`,c:C.cyan},{l:"ARAZİ",v:mDep.t.toUpperCase(),c:C.amber},{l:"FAKTOR",v:`x${(mTf*mEf).toFixed(2)}`,c:C.green},{l:"SİSTEM",v:mDep.sys.length,c:C.purple}].map((x,i) => (
-                  <div key={i} style={{ background: `${x.c}08`, border: `1px solid ${x.c}20`, borderRadius: 2, padding: "2px 4px", textAlign: "center" }}>
-                    <div style={{ fontSize: 6, color: C.textDim }}>{x.l}</div>
-                    <div style={{ fontSize: 11, fontWeight: 900, color: x.c }}>{x.v}</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4, marginBottom: 6 }}>
+              {[{l:"RAKIM",v:`${mDep.e}m`,c:C.cyan},{l:"ARAZİ",v:mDep.t.toUpperCase(),c:C.amber},{l:"FAKTÖR",v:`x${(mTf*mEf).toFixed(2)}`,c:C.green},{l:"SİSTEM",v:mDep.sys.length,c:C.purple}].map((x,i) => (
+                  <div key={i} style={{ background: `${x.c}08`, border: `1px solid ${x.c}20`, borderRadius: 4, padding: "4px 6px", textAlign: "center" }}>
+                    <div style={{ fontSize: 9, color: C.textDim, fontFamily: FONT }}>{x.l}</div>
+                    <div style={{ fontSize: 14, fontWeight: 800, color: x.c, fontFamily: MONO }}>{x.v}</div>
                   </div>
               ))}
             </div>
-            <div style={{ fontSize: 6, color: C.amber, fontWeight: 700, marginBottom: 2 }}>ETKİLİ MENZİLLER</div>
+            <div style={{ fontSize: 10, color: C.amber, fontWeight: 700, marginBottom: 4, fontFamily: FONT }}>ETKİLİ MENZİLLER</div>
             {mDep.sys.map(sid => { const s=MAP_SYS.find(x=>x.id===sid); if(!s)return null; const aET=Math.round(s.rET*mTf*mEf), aED=s.rED>0?Math.round(s.rED*mTf*mEf):0;
-              return (<div key={sid} style={{ display: "flex", alignItems: "center", gap: 3, padding: "1px 4px", marginBottom: 1, background: `${s.color}06`, borderRadius: 2, fontSize: 7 }}>
-                <div style={{ width: 4, height: 4, borderRadius: "50%", background: s.color }} />
-                <span style={{ fontWeight: 700, color: C.white, minWidth: 50 }}>{s.name}</span>
-                {aET>5?<><span style={{ color: C.red }}>ET:{aET}km</span>{aED>0&&<span style={{ color: C.cyan, marginLeft: 3 }}>ED:{aED}km</span>}</>:aET>0?<span style={{ color: C.red }}>ET:{Math.round(aET*1000)}m</span>:null}
+              return (<div key={sid} style={{ display: "flex", alignItems: "center", gap: 5, padding: "3px 6px", marginBottom: 2, background: `${s.color}06`, borderRadius: 4, fontSize: 10, fontFamily: FONT }}>
+                <div style={{ width: 5, height: 5, borderRadius: "50%", background: s.color }} />
+                <span style={{ fontWeight: 700, color: C.white, minWidth: 55 }}>{s.name}</span>
+                {aET>5?<><span style={{ color: C.red }}>ET:{aET}km</span>{aED>0&&<span style={{ color: C.cyan, marginLeft: 4 }}>ED:{aED}km</span>}</>:aET>0?<span style={{ color: C.red }}>ET:{Math.round(aET*1000)}m</span>:null}
               </div>);
             })}
           </Panel>}
         </div>
         {/* Map */}
         <div style={{ position: "relative" }}>
-          <Panel title={`TURKIYE ${mDep?`— ${mDep.name}`:""} [${mZoom.toFixed(1)}x]`} glow={C.cyan} noPad>
+          <Panel title={`TÜRKİYE ${mDep?`— ${mDep.name}`:""} [${mZoom.toFixed(1)}x]`} glow={C.cyan} noPad>
             <svg ref={mapRef} width={MW} height={MH} viewBox={`0 0 ${MW} ${MH}`}
               style={{ width: "100%", height: "auto", background: "#040810", cursor: mDrag?"grabbing":"grab", touchAction: "none", display: "block" }}
               onWheel={mWheel} onMouseDown={mMouseDown} onMouseMove={mMouseMove} onMouseUp={mMouseUp} onMouseLeave={mMouseUp} onDoubleClick={mReset}>
@@ -214,14 +214,14 @@ export default function Simulasyon() {
               <button key={i} onClick={b.f} style={{ width: 28, height: 28, borderRadius: 4, border: `1px solid ${C.border}`, background: `${C.panel}ee`, color: C.white, fontSize: 15, fontWeight: 900, cursor: "pointer", fontFamily: "monospace", display: "flex", alignItems: "center", justifyContent: "center" }}>{b.l}</button>
             ))}
           </div>
-          <div style={{ position: "absolute", bottom: 12, left: 10, background: `${C.panel}cc`, padding: "2px 6px", borderRadius: 3, fontSize: 8, color: C.textDim, fontFamily: "monospace", border: `1px solid ${C.border}` }}>{mZoom.toFixed(1)}x</div>
+          <div style={{ position: "absolute", bottom: 12, left: 10, background: `${C.panel}cc`, padding: "3px 8px", borderRadius: 4, fontSize: 11, color: C.textDim, fontFamily: MONO, border: `1px solid ${C.border}` }}>{mZoom.toFixed(1)}x</div>
         </div>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4, fontSize: 7, marginTop: 6, padding: "6px 8px", background: C.panel, borderRadius: 4, border: `1px solid ${C.border}` }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, fontSize: 11, marginTop: 10, padding: "10px 12px", background: C.panel, borderRadius: 6, border: `1px solid ${C.border}`, fontFamily: FONT }}>
         <div><span style={{ color: C.red }}>{"━"}</span> ET (Taarruz) | <span style={{ color: C.cyan }}>{"╤╤"}</span> ED (Tespit)</div>
-        <div>Ovax1.0 | Kiyix1.12 | Platox0.9 | Daglikx0.6</div>
-        <div>Il: <span style={{ color: "#9a7050" }}>{"●"}</span>&gt;1500m <span style={{ color: "#7a8a60" }}>{"●"}</span>&gt;800m <span style={{ color: "#5a7a9a" }}>{"●"}</span>&lt;800m</div>
-        <div style={{ color: C.textDim }}>Tahmini degerler | Gercek menziller sinifli bilgidir</div>
+        <div>Ova x1.0 | Kıyı x1.12 | Plato x0.9 | Dağlık x0.6</div>
+        <div>İl: <span style={{ color: "#9a7050" }}>{"●"}</span>&gt;1500m <span style={{ color: "#7a8a60" }}>{"●"}</span>&gt;800m <span style={{ color: "#5a7a9a" }}>{"●"}</span>&lt;800m</div>
+        <div style={{ color: C.textDim }}>Tahmini değerler | Gerçek menziller sınıflı bilgidir</div>
       </div>
     </div>
   );
