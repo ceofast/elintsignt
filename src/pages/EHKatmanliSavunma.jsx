@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { C, glow } from "../theme";
+import { C, FONT, MONO, glow } from "../theme";
 import { Panel, Badge, SeverityBar } from "../components";
 
 /* ── Data ─────────────────────────────────────────────────────── */
@@ -125,7 +125,7 @@ const batteryArchitectures = [
         { name: "İHTAR ACAR Radarı", role: "Küçük RCS Hedef Tespiti", producer: "ASELSAN", detail: "Drone boyutlu hedef tespiti, otomatik takip", qty: "1 / küme" },
         { name: "EO/IR Sensör", role: "Pasif Takip & Tanıma", producer: "ASELSAN", detail: "Termal kamera, TV, lazer mesafe ölçer", qty: "1 / küme" },
       ]},
-      { cat: "RF KARISTIRMA", items: [
+      { cat: "RF KARIŞTIRMA", items: [
         { name: "KANGAL-FPV", role: "FPV Odaklı RF Jammer", producer: "ASELSAN", detail: "<25 kg, frekans atlama takibi, reaktif", qty: "2–4 / küme" },
         { name: "KANGAL Barrage", role: "Geniş Bant Karıştırıcı", producer: "ASELSAN", detail: "Baraj karıştırma, sürü dronlara karşı", qty: "1–2 / küme" },
       ]},
@@ -203,7 +203,7 @@ const batteryArchitectures = [
       { cat: "ESM (TESPİT)", items: [
         { name: "ARES-2N(V)2", role: "Radar ESM", producer: "ASELSAN", detail: "Geniş bant, anlık tespit, sınıflandırma", qty: "1 / gemi" },
       ]},
-      { cat: "ECM (KARISTIRMA)", items: [
+      { cat: "ECM (KARIŞTIRMA)", items: [
         { name: "AREAS-2N", role: "Radar ECM", producer: "ASELSAN", detail: "AESA, DRFM, 32 eş zamanlı tehdit", qty: "1 / gemi" },
         { name: "NAZAR", role: "Lazer Kör Etme", producer: "Meteksan", detail: "EO/IR güdümlü füzeleri kör etme", qty: "1-2 / gemi" },
       ]},
@@ -224,17 +224,17 @@ const batteryArchitectures = [
 
 const catIcons = {
   "RADAR ES": "◎", "RADAR EA": "◆", "KOMUTA": "◉", "PLATFORM": "■",
-  "TESPİT": "◎", "RF KARISTIRMA": "◆", "GNSS ALDATMA": "◇", "HPEM / LAZER": "✦",
+  "TESPİT": "◎", "RF KARIŞTIRMA": "◆", "GNSS ALDATMA": "◇", "HPEM / LAZER": "✦",
   "ELEKTRONİK DESTEK": "◎", "ELEKTRONİK TAARRUZ": "◆",
   "ÖZ-KORUMA": "■", "STAND-OFF JAMMER": "◆", "DIRCM / CMDS": "✦",
-  "ESM (TESPİT)": "◎", "ECM (KARISTIRMA)": "◆", "ALDATICI": "◇", "TORPİDO KT": "▲", "İNSANSIZ": "■",
+  "ESM (TESPİT)": "◎", "ECM (KARIŞTIRMA)": "◆", "ALDATICI": "◇", "TORPİDO KT": "▲", "İNSANSIZ": "■",
 };
 const catColors = {
   "RADAR ES": C.purple, "RADAR EA": C.red, "KOMUTA": C.cyan, "PLATFORM": C.green,
-  "TESPİT": C.purple, "RF KARISTIRMA": C.red, "GNSS ALDATMA": C.amber, "HPEM / LAZER": C.red,
+  "TESPİT": C.purple, "RF KARIŞTIRMA": C.red, "GNSS ALDATMA": C.amber, "HPEM / LAZER": C.red,
   "ELEKTRONİK DESTEK": C.purple, "ELEKTRONİK TAARRUZ": C.red,
   "ÖZ-KORUMA": C.amber, "STAND-OFF JAMMER": C.red, "DIRCM / CMDS": C.green,
-  "ESM (TESPİT)": C.purple, "ECM (KARISTIRMA)": C.red, "ALDATICI": C.amber, "TORPİDO KT": C.cyan, "İNSANSIZ": C.deniz,
+  "ESM (TESPİT)": C.purple, "ECM (KARIŞTIRMA)": C.red, "ALDATICI": C.amber, "TORPİDO KT": C.cyan, "İNSANSIZ": C.deniz,
 };
 
 /* ── Battery Architecture Card ─────────────────────────────── */
@@ -244,34 +244,34 @@ const BatteryArchCard = ({ arch }) => {
 
   return (
     <Panel title={`${arch.name} — ${arch.fullName}`} sub={`${arch.layer} · ${arch.range} · ${arch.producers.join(" / ")}`} glow={arch.color}>
-      <div style={{ fontSize: 9, color: C.textDim, fontFamily: "monospace", marginBottom: 10, lineHeight: 1.5 }}>
+      <div style={{ fontSize: 13, color: C.textDim, fontFamily: FONT, marginBottom: 12, lineHeight: 1.6 }}>
         {arch.description}
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         {arch.components.map((comp, ci) => {
           const isOpen = openCat === ci;
           const cc = catColors[comp.cat] || C.textDim;
           const icon = catIcons[comp.cat] || "·";
 
           return (
-            <div key={ci} style={{ border: `1px solid ${isOpen ? cc : C.border}40`, borderRadius: 3, overflow: "hidden", transition: "border-color 0.2s" }}>
+            <div key={ci} style={{ border: `1px solid ${isOpen ? cc : C.border}40`, borderRadius: 6, overflow: "hidden", transition: "border-color 0.2s" }}>
               <button
                 onClick={() => setOpenCat(isOpen ? null : ci)}
                 style={{
-                  display: "flex", alignItems: "center", gap: 8, width: "100%",
-                  padding: "8px 12px", border: "none", cursor: "pointer",
+                  display: "flex", alignItems: "center", gap: 10, width: "100%",
+                  padding: "10px 14px", border: "none", cursor: "pointer",
                   background: isOpen ? `${cc}10` : `${C.bg}80`,
-                  fontFamily: "monospace", textAlign: "left", transition: "all 0.2s",
+                  fontFamily: FONT, textAlign: "left", transition: "all 0.2s",
                 }}
               >
-                <span style={{ fontSize: 10, color: cc }}>{icon}</span>
-                <span style={{ fontSize: 9, fontWeight: 800, color: isOpen ? cc : C.text, letterSpacing: 1, flex: 1 }}>
+                <span style={{ fontSize: 13, color: cc }}>{icon}</span>
+                <span style={{ fontSize: 12, fontWeight: 800, color: isOpen ? cc : C.text, letterSpacing: 1.2, flex: 1, fontFamily: FONT }}>
                   {comp.cat}
                 </span>
                 <Badge color={cc}>{comp.items.length}</Badge>
                 <span style={{
-                  fontSize: 8, color: cc, fontWeight: 900,
+                  fontSize: 10, color: cc, fontWeight: 900,
                   transform: isOpen ? "rotate(90deg)" : "rotate(0deg)",
                   transition: "transform 0.2s", display: "inline-block",
                 }}>&#9656;</span>
@@ -282,20 +282,20 @@ const BatteryArchCard = ({ arch }) => {
                 overflow: "hidden",
                 transition: "max-height 0.3s ease-in-out",
               }}>
-                <div style={{ padding: "4px 8px 8px", display: "flex", flexDirection: "column", gap: 4 }}>
+                <div style={{ padding: "6px 10px 10px", display: "flex", flexDirection: "column", gap: 6 }}>
                   {comp.items.map((item, ii) => (
                     <div key={ii} style={{
-                      background: `${cc}06`, border: `1px solid ${cc}15`, borderRadius: 3,
-                      padding: "8px 10px", borderLeft: `3px solid ${cc}60`,
+                      background: `${cc}08`, border: `1px solid ${cc}18`, borderRadius: 6,
+                      padding: "10px 14px", borderLeft: `3px solid ${cc}60`,
                     }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 3 }}>
-                        <span style={{ fontSize: 11, fontWeight: 900, color: cc, fontFamily: "monospace" }}>{item.name}</span>
-                        <span style={{ fontSize: 7, color: C.textDim, fontFamily: "monospace", background: `${C.border}40`, padding: "1px 6px", borderRadius: 2 }}>{item.qty}</span>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 4 }}>
+                        <span style={{ fontSize: 13, fontWeight: 800, color: cc, fontFamily: FONT }}>{item.name}</span>
+                        <span style={{ fontSize: 10, color: C.textDim, fontFamily: MONO, background: `${C.border}40`, padding: "2px 8px", borderRadius: 4 }}>{item.qty}</span>
                       </div>
-                      <div style={{ fontSize: 8, color: C.text, fontFamily: "monospace", fontWeight: 700, marginBottom: 2 }}>{item.role}</div>
-                      <div style={{ fontSize: 8, color: C.textDim, fontFamily: "monospace", lineHeight: 1.4 }}>{item.detail}</div>
+                      <div style={{ fontSize: 12, color: C.text, fontFamily: FONT, fontWeight: 700, marginBottom: 3 }}>{item.role}</div>
+                      <div style={{ fontSize: 11, color: C.textDim, fontFamily: FONT, lineHeight: 1.5 }}>{item.detail}</div>
                       {item.producer && item.producer !== "—" && (
-                        <div style={{ fontSize: 7, color: `${cc}90`, fontFamily: "monospace", marginTop: 3, letterSpacing: 0.5 }}>
+                        <div style={{ fontSize: 10, color: `${cc}90`, fontFamily: FONT, marginTop: 4, letterSpacing: 0.5 }}>
                           Üretici: {item.producer}
                         </div>
                       )}
@@ -352,18 +352,18 @@ const RangeSpectrumDiagram = () => {
       <line x1={originX} y1={originY} x2={toX(maxRange)} y2={originY} stroke={C.borderHi} strokeWidth={1.5} />
       <line x1={originX} y1={originY} x2={originX} y2={toY(maxFreq)} stroke={C.borderHi} strokeWidth={1.5} />
 
-      <text x={toX(maxRange / 2)} y={H - 8} textAnchor="middle" fill={C.textDim} fontSize={9} fontFamily="monospace" fontWeight={700}>
+      <text x={toX(maxRange / 2)} y={H - 8} textAnchor="middle" fill={C.textDim} fontSize={11} fontFamily="Inter, sans-serif" fontWeight={700}>
         MENZİL (km)
       </text>
-      <text x={14} y={toY(maxFreq / 2)} textAnchor="middle" fill={C.textDim} fontSize={9} fontFamily="monospace" fontWeight={700} transform={`rotate(-90,14,${toY(maxFreq / 2)})`}>
+      <text x={14} y={toY(maxFreq / 2)} textAnchor="middle" fill={C.textDim} fontSize={11} fontFamily="Inter, sans-serif" fontWeight={700} transform={`rotate(-90,14,${toY(maxFreq / 2)})`}>
         FREKANS (GHz)
       </text>
 
       {gridRanges.map(r => (
-        <text key={`tr${r}`} x={toX(r)} y={originY + 14} textAnchor="middle" fill={C.textDim} fontSize={7} fontFamily="monospace">{r}</text>
+        <text key={`tr${r}`} x={toX(r)} y={originY + 14} textAnchor="middle" fill={C.textDim} fontSize={9} fontFamily="Inter, sans-serif">{r}</text>
       ))}
       {gridFreqs.map(f => (
-        <text key={`tf${f}`} x={originX - 8} y={toY(f) + 3} textAnchor="end" fill={C.textDim} fontSize={7} fontFamily="monospace">{f}</text>
+        <text key={`tf${f}`} x={originX - 8} y={toY(f) + 3} textAnchor="end" fill={C.textDim} fontSize={9} fontFamily="Inter, sans-serif">{f}</text>
       ))}
 
       {[...layerDefs].reverse().map((l, i) => {
@@ -375,10 +375,10 @@ const RangeSpectrumDiagram = () => {
         return (
           <g key={i}>
             <rect x={x1} y={y2} width={x2-x1} height={y1-y2} fill={`${l.color}15`} stroke={l.color} strokeWidth={1.5} strokeOpacity={0.5} rx={4} filter="url(#ehGlow)" />
-            <text x={(x1+x2)/2} y={(y1+y2)/2} textAnchor="middle" fill={l.color} fontSize={10} fontWeight={900} fontFamily="monospace" style={{ textShadow: `0 0 8px ${l.color}` }}>
+            <text x={(x1+x2)/2} y={(y1+y2)/2} textAnchor="middle" fill={l.color} fontSize={12} fontWeight={800} fontFamily="Inter, sans-serif" style={{ textShadow: `0 0 8px ${l.color}` }}>
               {l.label}
             </text>
-            <text x={(x1+x2)/2} y={(y1+y2)/2+13} textAnchor="middle" fill={`${l.color}aa`} fontSize={7} fontFamily="monospace">
+            <text x={(x1+x2)/2} y={(y1+y2)/2+15} textAnchor="middle" fill={`${l.color}aa`} fontSize={9} fontFamily="Inter, sans-serif">
               {l.rMin}–{l.rMax} km
             </text>
           </g>
@@ -388,7 +388,7 @@ const RangeSpectrumDiagram = () => {
       <circle cx={originX} cy={originY} r={4} fill={C.green} stroke={C.bg} strokeWidth={2}>
         <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite" />
       </circle>
-      <text x={originX} y={originY + 24} textAnchor="middle" fill={C.green} fontSize={7} fontFamily="monospace" fontWeight={700}>
+      <text x={originX} y={originY + 24} textAnchor="middle" fill={C.green} fontSize={9} fontFamily="Inter, sans-serif" fontWeight={700}>
         EH MERKEZİ
       </text>
     </svg>
@@ -399,18 +399,18 @@ const RangeSpectrumDiagram = () => {
 
 const SystemCard = ({ system, color }) => (
   <div style={{
-    background: `${color}08`, border: `1px solid ${color}20`, borderRadius: 3,
-    padding: "8px 10px", borderLeft: `3px solid ${color}`,
+    background: `${color}08`, border: `1px solid ${color}22`, borderRadius: 6,
+    padding: "10px 14px", borderLeft: `3px solid ${color}`,
   }}>
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
-      <span style={{ fontSize: 11, fontWeight: 900, color, fontFamily: "monospace" }}>{system.name}</span>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+      <span style={{ fontSize: 13, fontWeight: 800, color, fontFamily: FONT }}>{system.name}</span>
       <Badge color={color}>{system.type}</Badge>
     </div>
-    <div style={{ display: "flex", gap: 14, fontSize: 8, color: C.textDim, fontFamily: "monospace" }}>
+    <div style={{ display: "flex", gap: 16, fontSize: 12, color: C.textDim, fontFamily: FONT }}>
       <span>Menzil: <span style={{ color: C.text, fontWeight: 700 }}>{system.range}</span></span>
       <span>Frekans: <span style={{ color: C.text, fontWeight: 700 }}>{system.alt}</span></span>
     </div>
-    <div style={{ fontSize: 7, color: C.textDim, marginTop: 3, fontFamily: "monospace", fontStyle: "italic" }}>{system.note}</div>
+    <div style={{ fontSize: 11, color: C.textDim, marginTop: 4, fontFamily: FONT, fontStyle: "italic" }}>{system.note}</div>
   </div>
 );
 
@@ -418,14 +418,14 @@ const SystemCard = ({ system, color }) => (
 
 const FlowArrow = ({ from, to, color }) => (
   <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
-    <div style={{ padding: "5px 10px", background: `${color}15`, border: `1px solid ${color}40`, borderRadius: 3, fontSize: 9, fontWeight: 800, color, fontFamily: "monospace", whiteSpace: "nowrap" }}>
+    <div style={{ padding: "6px 12px", background: `${color}15`, border: `1px solid ${color}40`, borderRadius: 4, fontSize: 11, fontWeight: 700, color, fontFamily: FONT, whiteSpace: "nowrap" }}>
       {from}
     </div>
     <div style={{ display: "flex", alignItems: "center", margin: "0 -1px" }}>
       <div style={{ width: 20, height: 2, background: `linear-gradient(90deg, ${color}60, ${color})` }} />
       <div style={{ width: 0, height: 0, borderTop: "4px solid transparent", borderBottom: "4px solid transparent", borderLeft: `6px solid ${color}` }} />
     </div>
-    <div style={{ padding: "5px 10px", background: `${color}15`, border: `1px solid ${color}40`, borderRadius: 3, fontSize: 9, fontWeight: 800, color, fontFamily: "monospace", whiteSpace: "nowrap" }}>
+    <div style={{ padding: "6px 12px", background: `${color}15`, border: `1px solid ${color}40`, borderRadius: 4, fontSize: 11, fontWeight: 700, color, fontFamily: FONT, whiteSpace: "nowrap" }}>
       {to}
     </div>
   </div>
@@ -435,17 +435,17 @@ const FlowArrow = ({ from, to, color }) => (
 
 export default function EHKatmanliSavunma() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10, animation: "fadeUp 0.35s ease-out" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 14, animation: "fadeUp 0.35s ease-out" }}>
 
       {/* Stats */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10 }}>
         {stats.map((s, i) => (
           <Panel key={i} glow={s.color}>
-            <div style={{ textAlign: "center", padding: "8px 4px" }}>
-              <div style={{ fontFamily: "monospace", fontSize: 22, fontWeight: 900, color: s.color, lineHeight: 1, textShadow: glow(s.color) }}>
+            <div style={{ textAlign: "center", padding: "10px 6px" }}>
+              <div style={{ fontFamily: MONO, fontSize: 26, fontWeight: 800, color: s.color, lineHeight: 1, textShadow: glow(s.color) }}>
                 {s.value}
               </div>
-              <div style={{ fontSize: 8, color: C.textDim, marginTop: 4, fontFamily: "monospace", letterSpacing: 0.5 }}>
+              <div style={{ fontSize: 11, color: C.textDim, marginTop: 6, fontFamily: FONT, letterSpacing: 0.5 }}>
                 {s.sub}
               </div>
             </div>
@@ -456,10 +456,10 @@ export default function EHKatmanliSavunma() {
       {/* Range / Spectrum Diagram */}
       <Panel title="EH Katmanlı Savunma — Menzil / Frekans Diyagramı" sub="Elektronik harp sistemlerinin mesafe ve frekans kapsama alanları" glow={C.cyan}>
         <RangeSpectrumDiagram />
-        <div style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 8 }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: 20, marginTop: 12 }}>
           {layers.map((l, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 8, fontFamily: "monospace" }}>
-              <div style={{ width: 10, height: 10, borderRadius: 2, background: l.color, boxShadow: glow(l.color, 6) }} />
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, fontFamily: FONT }}>
+              <div style={{ width: 12, height: 12, borderRadius: 3, background: l.color, boxShadow: glow(l.color, 6) }} />
               <span style={{ color: C.text, fontWeight: 700 }}>{l.name}</span>
               <span style={{ color: C.textDim }}>{l.range}</span>
             </div>
@@ -468,22 +468,22 @@ export default function EHKatmanliSavunma() {
       </Panel>
 
       {/* Battery Architectures */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         {batteryArchitectures.map(arch => (
           <BatteryArchCard key={arch.id} arch={arch} />
         ))}
       </div>
 
       {/* System Cards per Layer */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         {layers.map((layer, i) => (
           <Panel key={i} title={`${layer.label} — ${layer.name}`} sub={`Menzil: ${layer.range} · Spektrum: ${layer.spectrum}`} glow={layer.color}>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {layer.systems.map((sys, j) => (
                 <SystemCard key={j} system={sys} color={layer.color} />
               ))}
-              <div style={{ marginTop: 2 }}>
-                <div style={{ fontSize: 8, color: C.textDim, marginBottom: 3, fontFamily: "monospace" }}>KATMAN KAPSAMA</div>
+              <div style={{ marginTop: 4 }}>
+                <div style={{ fontSize: 11, color: C.textDim, marginBottom: 4, fontFamily: FONT, fontWeight: 600 }}>KATMAN KAPSAMA</div>
                 <SeverityBar value={layer.arcPct} color={layer.color} />
               </div>
             </div>
@@ -495,21 +495,21 @@ export default function EHKatmanliSavunma() {
       <Panel title="EHKKKS C2 — Entegrasyon Mimarisi" sub="Sensörden effektöre kadar elektronik harp komuta-kontrol veri akışı" glow={C.cyan}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
           <div>
-            <div style={{ fontSize: 9, fontWeight: 900, color: C.purple, letterSpacing: 1.5, marginBottom: 8, fontFamily: "monospace", textTransform: "uppercase" }}>
+            <div style={{ fontSize: 12, fontWeight: 800, color: C.purple, letterSpacing: 1.5, marginBottom: 10, fontFamily: FONT, textTransform: "uppercase" }}>
               Sensörler
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               {sensors.map((s, i) => (
-                <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "7px 10px", background: `${s.color}08`, border: `1px solid ${s.color}20`, borderRadius: 3, borderLeft: `3px solid ${s.color}` }}>
-                  <span style={{ fontSize: 11, fontWeight: 900, color: s.color, fontFamily: "monospace" }}>{s.name}</span>
-                  <span style={{ fontSize: 9, color: C.textDim, fontFamily: "monospace" }}>{s.range}</span>
+                <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", background: `${s.color}08`, border: `1px solid ${s.color}22`, borderRadius: 6, borderLeft: `3px solid ${s.color}` }}>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: s.color, fontFamily: FONT }}>{s.name}</span>
+                  <span style={{ fontSize: 11, color: C.textDim, fontFamily: MONO }}>{s.range}</span>
                 </div>
               ))}
             </div>
           </div>
 
           <div>
-            <div style={{ fontSize: 9, fontWeight: 900, color: C.cyan, letterSpacing: 1.5, marginBottom: 8, fontFamily: "monospace", textTransform: "uppercase" }}>
+            <div style={{ fontSize: 12, fontWeight: 800, color: C.cyan, letterSpacing: 1.5, marginBottom: 10, fontFamily: FONT, textTransform: "uppercase" }}>
               Komuta Zinciri
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "center" }}>
@@ -520,17 +520,17 @@ export default function EHKatmanliSavunma() {
           </div>
 
           <div>
-            <div style={{ fontSize: 9, fontWeight: 900, color: C.amber, letterSpacing: 1.5, marginBottom: 8, fontFamily: "monospace", textTransform: "uppercase" }}>
+            <div style={{ fontSize: 12, fontWeight: 800, color: C.amber, letterSpacing: 1.5, marginBottom: 10, fontFamily: FONT, textTransform: "uppercase" }}>
               Effektör Zinciri
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {effectorChain.map((e, i) => {
                 const lyr = layers[i];
                 return (
                   <div key={i}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "7px 10px", background: `${lyr.color}08`, border: `1px solid ${lyr.color}20`, borderRadius: 3, borderLeft: `3px solid ${lyr.color}` }}>
-                      <span style={{ fontSize: 11, fontWeight: 900, color: lyr.color, fontFamily: "monospace" }}>{e}</span>
-                      <span style={{ fontSize: 8, color: C.textDim, fontFamily: "monospace" }}>{lyr.range}</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 12px", background: `${lyr.color}08`, border: `1px solid ${lyr.color}22`, borderRadius: 6, borderLeft: `3px solid ${lyr.color}` }}>
+                      <span style={{ fontSize: 13, fontWeight: 800, color: lyr.color, fontFamily: FONT }}>{e}</span>
+                      <span style={{ fontSize: 11, color: C.textDim, fontFamily: MONO }}>{lyr.range}</span>
                     </div>
                     {i < effectorChain.length - 1 && (
                       <div style={{ display: "flex", justifyContent: "center", padding: "2px 0" }}>
@@ -545,7 +545,7 @@ export default function EHKatmanliSavunma() {
         </div>
 
         <div style={{ textAlign: "center", marginTop: 12 }}>
-          <span style={{ fontSize: 8, color: C.cyan, fontWeight: 700, fontFamily: "monospace", background: `${C.cyan}12`, padding: "3px 12px", borderRadius: 3, border: `1px solid ${C.cyan}25` }}>
+          <span style={{ fontSize: 12, color: C.cyan, fontWeight: 700, fontFamily: FONT, background: `${C.cyan}12`, padding: "6px 16px", borderRadius: 6, border: `1px solid ${C.cyan}25` }}>
             EHKKKS → Görev Planlama → Sinyal Analiz → Hedef Atama → Effektör Tetikleme
           </span>
         </div>
@@ -554,14 +554,14 @@ export default function EHKatmanliSavunma() {
       {/* Threat Coverage Matrix */}
       <Panel title="Tehdit Kapsama Matrisi" sub="Her katmanın etkili olduğu tehdit sınıfları" glow={C.red}>
         <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "monospace", fontSize: 10 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONT, fontSize: 13 }}>
             <thead>
               <tr>
-                <th style={{ textAlign: "left", padding: "6px 10px", borderBottom: `1px solid ${C.border}`, color: C.textDim, fontSize: 8, letterSpacing: 1 }}>
+                <th style={{ textAlign: "left", padding: "8px 12px", borderBottom: `1px solid ${C.border}`, color: C.textDim, fontSize: 11, letterSpacing: 1.2 }}>
                   TEHDİT SINIFI
                 </th>
                 {layers.map((l, i) => (
-                  <th key={i} style={{ textAlign: "center", padding: "6px 10px", borderBottom: `1px solid ${C.border}`, color: l.color, fontSize: 9, fontWeight: 900 }}>
+                  <th key={i} style={{ textAlign: "center", padding: "8px 12px", borderBottom: `1px solid ${C.border}`, color: l.color, fontSize: 12, fontWeight: 800 }}>
                     {l.name}
                   </th>
                 ))}
@@ -570,11 +570,11 @@ export default function EHKatmanliSavunma() {
             <tbody>
               {threats.map((threat, ti) => (
                 <tr key={ti} style={{ background: ti % 2 === 0 ? "transparent" : `${C.border}20` }}>
-                  <td style={{ padding: "7px 10px", borderBottom: `1px solid ${C.border}30`, color: C.text, fontWeight: 700, fontSize: 10 }}>
+                  <td style={{ padding: "8px 12px", borderBottom: `1px solid ${C.border}30`, color: C.text, fontWeight: 700, fontSize: 13 }}>
                     {threat}
                   </td>
                   {layers.map((l, li) => (
-                    <td key={li} style={{ textAlign: "center", padding: "7px 10px", borderBottom: `1px solid ${C.border}30` }}>
+                    <td key={li} style={{ textAlign: "center", padding: "8px 12px", borderBottom: `1px solid ${C.border}30` }}>
                       {l.threats[ti] ? (
                         <span style={{ color: C.green, fontSize: 14, fontWeight: 900, textShadow: glow(C.green, 6) }}>&#10003;</span>
                       ) : (
@@ -587,13 +587,13 @@ export default function EHKatmanliSavunma() {
             </tbody>
           </table>
         </div>
-        <div style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 8 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 8, fontFamily: "monospace" }}>
-            <span style={{ color: C.green, fontSize: 12, fontWeight: 900 }}>&#10003;</span>
+        <div style={{ display: "flex", justifyContent: "center", gap: 20, marginTop: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, fontFamily: FONT }}>
+            <span style={{ color: C.green, fontSize: 14, fontWeight: 900 }}>&#10003;</span>
             <span style={{ color: C.textDim }}>Etkili kapsama</span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 8, fontFamily: "monospace" }}>
-            <span style={{ color: C.red, fontSize: 12, fontWeight: 900, opacity: 0.6 }}>&#10007;</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, fontFamily: FONT }}>
+            <span style={{ color: C.red, fontSize: 14, fontWeight: 900, opacity: 0.6 }}>&#10007;</span>
             <span style={{ color: C.textDim }}>Kapsama dışı</span>
           </div>
         </div>
