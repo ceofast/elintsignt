@@ -130,13 +130,13 @@ export default function Simulasyon() {
       <div style={{ fontSize: 11, color: C.textDim, marginBottom: 8, fontFamily: FONT }}>Scroll: Yakınlaştır | Sürükle: Kaydır | Çift tık: Sıfırla | Nokta tıkla: Odaklan</div>
       <div style={{ display: "grid", gridTemplateColumns: "240px 1fr", gap: 10 }}>
         {/* Left panel */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: "70vh", overflowY: "auto" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: "calc(100vh - 140px)", overflowY: "auto" }}>
           <Panel title="İL SEÇİMİ" glow={C.cyan}>
             <input value={citySearch} onChange={e=>setCitySearch(e.target.value)} placeholder="İl ara..." style={{
               width: "100%", padding: "6px 8px", fontSize: 11, fontFamily: FONT, borderRadius: 4, marginBottom: 6,
               border: `1px solid ${C.border}`, background: C.bg, color: C.white, outline: "none",
             }}/>
-            <div style={{ maxHeight: 200, overflowY: "auto" }}>
+            <div style={{ maxHeight: 280, overflowY: "auto" }}>
               {(citySearch ? filteredCities : CITY_DEPS).map(d => (
                 <button key={d.id} className="hov" onClick={() => { mFocus(d); setCitySearch(""); }} style={{
                   display: "block", width: "100%", padding: "4px 8px", marginBottom: 2, background: mapSel===d.id?`${C.cyan}15`:"transparent",
@@ -146,22 +146,24 @@ export default function Simulasyon() {
               ))}
             </div>
           </Panel>
-          <Panel title="SİSTEMLER" glow={C.amber}>
-            {MAP_SYS.map(s => {
-              const deployed = mDep && mDep.sys.includes(s.id);
-              return (
-                <button key={s.id} className="hov" onClick={() => mToggle(s.id)} onMouseEnter={() => setMapHov(s.id)} onMouseLeave={() => setMapHov(null)} style={{
-                  display: "block", width: "100%", padding: "4px 8px", marginBottom: 2, background: mapAct.has(s.id)?`${s.color}10`:"transparent",
-                  border: `1px solid ${mapAct.has(s.id)?s.color+"40":"transparent"}`, borderRadius: 4, cursor: "pointer", textAlign: "left", fontFamily: FONT, opacity: deployed?1:0.3
-                }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                    <div style={{ width: 7, height: 7, borderRadius: "50%", background: mapAct.has(s.id)?s.color:C.border }} />
-                    <span style={{ fontSize: 11, fontWeight: 700, color: mapAct.has(s.id)?C.white:C.textDim, fontFamily: FONT }}>{s.name}</span>
-                    <span style={{ fontSize: 9, color: C.textDim, marginLeft: "auto", fontFamily: MONO }}>{s.rET>5?s.rET+"km":s.rET>0?Math.round(s.rET*1000)+"m":""}</span>
-                  </div>
-                </button>
-              );
-            })}
+          <Panel title="SİSTEMLER" glow={C.amber} noPad>
+            <div style={{ maxHeight: 260, overflowY: "auto", padding: "8px 14px" }}>
+              {MAP_SYS.map(s => {
+                const deployed = mDep && mDep.sys.includes(s.id);
+                return (
+                  <button key={s.id} className="hov" onClick={() => mToggle(s.id)} onMouseEnter={() => setMapHov(s.id)} onMouseLeave={() => setMapHov(null)} style={{
+                    display: "block", width: "100%", padding: "4px 8px", marginBottom: 2, background: mapAct.has(s.id)?`${s.color}10`:"transparent",
+                    border: `1px solid ${mapAct.has(s.id)?s.color+"40":"transparent"}`, borderRadius: 4, cursor: "pointer", textAlign: "left", fontFamily: FONT, opacity: deployed?1:0.3
+                  }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                      <div style={{ width: 7, height: 7, borderRadius: "50%", background: mapAct.has(s.id)?s.color:C.border }} />
+                      <span style={{ fontSize: 11, fontWeight: 700, color: mapAct.has(s.id)?C.white:C.textDim, fontFamily: FONT }}>{s.name}</span>
+                      <span style={{ fontSize: 9, color: C.textDim, marginLeft: "auto", fontFamily: MONO }}>{s.rET>5?s.rET+"km":s.rET>0?Math.round(s.rET*1000)+"m":""}</span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </Panel>
           <Panel title="KONTROL" glow={C.green}>
             {[{l:"ET Menzili",v:mapET,s:setMapET,c:C.red},{l:"ED Menzili",v:mapED,s:setMapED,c:C.cyan},{l:"Topografya",v:mapTerr,s:setMapTerr,c:C.green}].map((x,i) => (
