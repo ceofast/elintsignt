@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, Tooltip, ResponsiveContainer } from "recharts";
-import { C, ttStyle } from "../theme";
+import { C, FONT, MONO, ttStyle } from "../theme";
 import { Panel, Badge } from "../components";
 
 const radarScenario = [
@@ -61,72 +61,72 @@ export default function SenaryoMerkezi() {
   const s = scenarioFull[selScenario];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10, animation: "fadeUp 0.35s ease-out" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 14, animation: "fadeUp 0.35s ease-out" }}>
       <Panel title="Kuvvet x Senaryo Radar Analizi" glow={C.cyan}>
-        <ResponsiveContainer width="100%" height={320}>
+        <ResponsiveContainer width="100%" height={340}>
           <RadarChart data={radarScenario}>
             <PolarGrid stroke={C.border} />
-            <PolarAngleAxis dataKey="s" tick={{ fill: C.textDim, fontSize: 8, fontFamily: "monospace" }} />
-            <PolarRadiusAxis tick={{ fill: C.textMute, fontSize: 7 }} />
+            <PolarAngleAxis dataKey="s" tick={{ fill: C.text, fontSize: 12, fontFamily: "Inter, sans-serif" }} />
+            <PolarRadiusAxis tick={{ fill: C.textDim, fontSize: 10 }} />
             <Radar name="Kara" dataKey="kara" stroke={C.kara} fill={C.kara} fillOpacity={0.15} strokeWidth={2} />
             <Radar name="Hava" dataKey="hava" stroke={C.hava} fill={C.hava} fillOpacity={0.15} strokeWidth={2} />
             <Radar name="Deniz" dataKey="deniz" stroke={C.deniz} fill={C.deniz} fillOpacity={0.15} strokeWidth={2} />
-            <Legend wrapperStyle={{ fontSize: 9, fontFamily: "monospace" }} />
+            <Legend wrapperStyle={{ fontSize: 13, fontFamily: "Inter, sans-serif" }} />
             <Tooltip contentStyle={ttStyle} />
           </RadarChart>
         </ResponsiveContainer>
       </Panel>
 
       <Panel title="Senaryo Detay Paneli" sub="Bir senaryo seçerek akış diyagrami, sistem listesi ve taktik aciklamayi görüntüleyin" glow={C.amber}>
-        <div style={{ display: "flex", gap: 3, flexWrap: "wrap", marginBottom: 12 }}>
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 16 }}>
           {scenarioFull.map((sc,i) => (
             <button key={i} onClick={() => setSelScenario(i)} style={{
-              padding: "4px 8px", borderRadius: 2, fontSize: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", transition: "all 0.15s", whiteSpace: "nowrap",
+              padding: "7px 14px", borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: FONT, transition: "all 0.15s", whiteSpace: "nowrap",
               border: selScenario === i ? `1px solid ${sc.color}` : `1px solid ${C.border}`,
-              background: selScenario === i ? `${sc.color}18` : "transparent",
+              background: selScenario === i ? `${sc.color}20` : C.bg2,
               color: selScenario === i ? sc.color : C.textDim,
             }}>{sc.icon} {sc.name}</button>
           ))}
         </div>
 
-        <div style={{ background: `${s.color}06`, border: `1px solid ${s.color}25`, borderRadius: 4, padding: 14, animation: "slideIn 0.3s ease-out" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-            <span style={{ fontSize: 32 }}>{s.icon}</span>
+        <div style={{ background: `${s.color}0a`, border: `1px solid ${s.color}30`, borderRadius: 8, padding: 20, animation: "slideIn 0.3s ease-out" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16 }}>
+            <span style={{ fontSize: 38 }}>{s.icon}</span>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 16, fontWeight: 900, color: C.white, letterSpacing: 1 }}>{s.name}</div>
-              <div style={{ fontSize: 10, color: s.color, fontWeight: 600 }}>{s.count} aktif sistem</div>
-              <div style={{ fontSize: 10, color: C.text, marginTop: 2 }}>{s.desc}</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: C.white, letterSpacing: 1, fontFamily: FONT }}>{s.name}</div>
+              <div style={{ fontSize: 14, color: s.color, fontWeight: 700, marginTop: 2, fontFamily: MONO }}>{s.count} aktif sistem</div>
+              <div style={{ fontSize: 13, color: C.text, marginTop: 4, lineHeight: 1.5, fontFamily: FONT }}>{s.desc}</div>
             </div>
             <Badge color={s.priority === "KRİTİK" ? C.red : C.amber}>{s.priority}</Badge>
           </div>
 
-          <div style={{ background: C.bg2, borderRadius: 3, padding: "8px 10px", marginBottom: 10, border: `1px solid ${C.border}` }}>
-            <div style={{ fontSize: 8, color: C.cyan, fontWeight: 700, letterSpacing: 1, marginBottom: 4 }}>{"◉"} OPERASYONEL AKIS</div>
-            <div style={{ fontSize: 10, color: C.text, lineHeight: 1.6 }}>{s.flow}</div>
+          <div style={{ background: C.bg2, borderRadius: 6, padding: "12px 16px", marginBottom: 14, border: `1px solid ${C.borderHi}` }}>
+            <div style={{ fontSize: 11, color: C.cyan, fontWeight: 700, letterSpacing: 1.5, marginBottom: 6, fontFamily: FONT }}>{"◉"} OPERASYONEL AKIŞ</div>
+            <div style={{ fontSize: 13, color: C.text, lineHeight: 1.7, fontFamily: FONT }}>{s.flow}</div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
             <div>
-              <div style={{ fontSize: 8, color: s.color, fontWeight: 700, letterSpacing: 1, marginBottom: 4 }}>BİRİNCİL SİSTEMLER</div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
+              <div style={{ fontSize: 11, color: s.color, fontWeight: 700, letterSpacing: 1.5, marginBottom: 8, fontFamily: FONT }}>BİRİNCİL SİSTEMLER</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
                 {s.primary.map((p,j) => (
-                  <span key={j} style={{ fontSize: 8, padding: "2px 6px", background: `${s.color}15`, border: `1px solid ${s.color}30`, borderRadius: 2, color: C.white, fontWeight: 600 }}>{p}</span>
+                  <span key={j} style={{ fontSize: 12, padding: "4px 10px", background: `${s.color}18`, border: `1px solid ${s.color}35`, borderRadius: 4, color: C.white, fontWeight: 600, fontFamily: FONT }}>{p}</span>
                 ))}
               </div>
             </div>
             <div>
-              <div style={{ fontSize: 8, color: C.textDim, fontWeight: 700, letterSpacing: 1, marginBottom: 4 }}>İKİNCİL / DESTEK</div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
+              <div style={{ fontSize: 11, color: C.textDim, fontWeight: 700, letterSpacing: 1.5, marginBottom: 8, fontFamily: FONT }}>İKİNCİL / DESTEK</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
                 {s.secondary.map((p,j) => (
-                  <span key={j} style={{ fontSize: 8, padding: "2px 6px", background: `${C.textDim}10`, border: `1px solid ${C.border}`, borderRadius: 2, color: C.textDim }}>{p}</span>
+                  <span key={j} style={{ fontSize: 12, padding: "4px 10px", background: `${C.textDim}12`, border: `1px solid ${C.border}`, borderRadius: 4, color: C.textDim, fontFamily: FONT }}>{p}</span>
                 ))}
               </div>
             </div>
           </div>
 
-          <div style={{ background: C.bg2, borderRadius: 3, padding: "8px 10px", border: `1px solid ${C.border}` }}>
-            <div style={{ fontSize: 8, color: C.amber, fontWeight: 700, letterSpacing: 1, marginBottom: 4 }}>{"◆"} TAKTİK AÇIKLAMA</div>
-            <div style={{ fontSize: 9, color: C.text, lineHeight: 1.6 }}>{s.tactics}</div>
+          <div style={{ background: C.bg2, borderRadius: 6, padding: "12px 16px", border: `1px solid ${C.borderHi}` }}>
+            <div style={{ fontSize: 11, color: C.amber, fontWeight: 700, letterSpacing: 1.5, marginBottom: 6, fontFamily: FONT }}>{"◆"} TAKTİK AÇIKLAMA</div>
+            <div style={{ fontSize: 13, color: C.text, lineHeight: 1.7, fontFamily: FONT }}>{s.tactics}</div>
           </div>
         </div>
       </Panel>
