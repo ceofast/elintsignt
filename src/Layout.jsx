@@ -314,8 +314,16 @@ export default function Layout() {
         </div>
 
         {/* FOOTER */}
-        <div style={{ textAlign: "center", padding: "14px", borderTop: `1px solid ${C.border}`, background: C.bg2, position: "relative", zIndex: 1 }}>
+        <div style={{ textAlign: "center", padding: "16px 14px", borderTop: `1px solid ${C.border}`, background: C.bg2, position: "relative", zIndex: 1 }}>
           <div className="footer-text" style={{ fontSize: 10, color: C.textMute, letterSpacing: 3, fontFamily: MONO }}>TSK {activeSection.headerTitle} v2.0 &middot; AÇIK KAYNAK VERİLERE DAYALI &middot; MART 2026</div>
+          <div style={{ marginTop: 8, paddingTop: 8, borderTop: `1px solid ${C.border}` }}>
+            <div style={{ fontSize: 11, color: C.textDim, fontFamily: FONT, lineHeight: 1.6 }}>
+              Tüm veriler açık kaynaklardan derlenmiştir.
+            </div>
+            <div style={{ fontSize: 12, color: C.white, fontFamily: FONT, fontWeight: 600, marginTop: 4 }}>
+              Hazırlayan: <span style={{ color: activeSection.color }}>Cem BIKMAZ</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
