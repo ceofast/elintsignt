@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { C, glow, forceColor } from "../../theme";
+import { C, FONT, MONO, glow, forceColor } from "../../theme";
 import { Panel, ForceTag, Badge, SeverityBar } from "../../components";
 
 const systemDB = [
@@ -65,7 +65,7 @@ const systemDB = [
     seeker: "Radar + Elektro-optik", warhead: "35mm ATOM / HEI",
     platform: "Gemi üstü", year: 2020,
     desc: "KORKUT'un deniz versiyonu. Çift namlulu 35mm, dakikada 1.100 atış. Anti-gemi füzesi, helikopter, İHA ve su üstü hedeflere karşı nokta savunma. Otomatik şeritsiz mühimmat besleme.",
-    note: "TCG İstanbul (F-515) ve İstif sınıfı fragatlarda konuşlu.",
+    note: "TCG İstanbul (F-515) ve İstif sınıfı fırkateynlerde konuşlu.",
     summary: "KORKUT'un denizleştirilmiş versiyonu olan GÖKDENİZ, gemilerin son savunma katmanını (CIWS - Close-In Weapon System) oluşturur. ASELSAN tarafından geliştirilen sistem, çift namlulu 35mm otomatik top ile dakikada 1.100 atış kapasitesine sahiptir. ATOM akıllı mühimmatı ile anti-gemi füzeleri, helikopterler, İHA'lar ve su üstü asimetrik tehditlere karşı etkili nokta savunma sağlar. Otomatik şeritsiz mühimmat besleme sistemi sayesinde kesintisiz ateş imkânı sunar. Entegre arama/takip radarı ve EO/IR sensör süiti ile otonom hedef tespit, takip ve angajman yapabilir. TCG İstanbul (F-515), İstif sınıfı fırkateynler ve TCG Anadolu'da (L-400) konuşludur.",
     specs: [
       { k: "Baz Sistem", v: "KORKUT (denizleştirilmiş)" },
@@ -620,15 +620,15 @@ export default function HSEnvanter() {
               placeholder="Sistem ara... (isim, kategori, üretici, platform, senaryo)"
               style={{
                 width: "100%", padding: "8px 12px 8px 30px", background: C.bg2,
-                border: `1px solid ${C.border}`, borderRadius: 3, color: C.white,
-                fontSize: 11, fontFamily: "monospace", outline: "none", boxSizing: "border-box",
+                border: `1px solid ${C.border}`, borderRadius: 5, color: C.white,
+                fontSize: 13, fontFamily: FONT, outline: "none", boxSizing: "border-box",
               }}
               onFocus={(e) => (e.target.style.borderColor = C.cyan)}
               onBlur={(e) => (e.target.style.borderColor = C.border)}
             />
             <span style={{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", fontSize: 12, color: C.textDim }}>{"🔍"}</span>
           </div>
-          <span style={{ fontSize: 10, color: C.textDim, fontFamily: "monospace", whiteSpace: "nowrap" }}>
+          <span style={{ fontSize: 13, color: C.textDim, fontFamily: MONO, whiteSpace: "nowrap" }}>
             {filtered.length} / {systemDB.length}
           </span>
         </div>
@@ -641,8 +641,8 @@ export default function HSEnvanter() {
             key={i}
             onClick={() => { setSelectedCat(cat.value); setSelectedId(null); }}
             style={{
-              padding: "3px 10px", borderRadius: 2, fontSize: 8, fontWeight: 700, cursor: "pointer",
-              fontFamily: "monospace", letterSpacing: 0.5, transition: "all 0.15s",
+              padding: "3px 10px", borderRadius: 2, fontSize: 11, fontWeight: 700, cursor: "pointer",
+              fontFamily: FONT, letterSpacing: 0.5, transition: "all 0.15s",
               border: selectedCat === cat.value ? `1px solid ${C.cyan}` : `1px solid ${C.border}`,
               background: selectedCat === cat.value ? `${C.cyan}18` : "transparent",
               color: selectedCat === cat.value ? C.cyan : C.textDim,
@@ -687,16 +687,16 @@ export default function HSEnvanter() {
                     </span>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 5, flexWrap: "wrap" }}>
-                        <span style={{ fontSize: 10, fontWeight: 800, color: C.white, fontFamily: "monospace" }}>{sys.name}</span>
+                        <span style={{ fontSize: 13, fontWeight: 800, color: C.white, fontFamily: FONT }}>{sys.name}</span>
                         <ForceTag force={sys.force} />
                       </div>
-                      <div style={{ fontSize: 8, color: C.textDim, marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: "monospace" }}>
+                      <div style={{ fontSize: 11, color: C.textDim, marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: FONT }}>
                         {sys.cat} — {sys.producer}
                       </div>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2 }}>
                       <Badge color={statusColor(sys.status)}>{sys.status}</Badge>
-                      <span style={{ fontSize: 7, color: C.textDim, fontFamily: "monospace" }}>{sys.year}</span>
+                      <span style={{ fontSize: 10, color: C.textDim, fontFamily: MONO }}>{sys.year}</span>
                     </div>
                   </div>
                 </div>
@@ -713,27 +713,27 @@ export default function HSEnvanter() {
               <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginBottom: 12 }}>
                 <ForceTag force={sel.force} />
                 <Badge color={statusColor(sel.status)}>{sel.status}</Badge>
-                <span style={{ fontSize: 9, padding: "1px 7px", borderRadius: 2, fontWeight: 600, color: C.textDim, border: `1px solid ${C.border}`, fontFamily: "monospace" }}>
+                <span style={{ fontSize: 12, padding: "2px 8px", borderRadius: 4, fontWeight: 600, color: C.textDim, border: `1px solid ${C.border}`, fontFamily: FONT }}>
                   {sel.producer}
                 </span>
-                <span style={{ fontSize: 9, padding: "1px 7px", borderRadius: 2, fontWeight: 600, color: C.textDim, border: `1px solid ${C.border}`, fontFamily: "monospace" }}>
+                <span style={{ fontSize: 12, padding: "2px 8px", borderRadius: 4, fontWeight: 600, color: C.textDim, border: `1px solid ${C.border}`, fontFamily: FONT }}>
                   {sel.year}
                 </span>
               </div>
 
               {/* Summary / Description */}
-              <div style={{ background: C.bg2, borderRadius: 3, padding: "10px 12px", marginBottom: 12, border: `1px solid ${C.border}` }}>
-                <div style={{ fontSize: 8, color: C.cyan, fontWeight: 700, letterSpacing: 1, marginBottom: 4, fontFamily: "monospace" }}>{"◉"} TANIM</div>
-                <div style={{ fontSize: 10, color: C.text, lineHeight: 1.7, fontFamily: "monospace" }}>{sel.summary || sel.desc}</div>
+              <div style={{ background: C.bg2, borderRadius: 5, padding: "10px 12px", marginBottom: 12, border: `1px solid ${C.border}` }}>
+                <div style={{ fontSize: 11, color: C.cyan, fontWeight: 700, letterSpacing: 1, marginBottom: 4, fontFamily: FONT }}>{"◉"} TANIM</div>
+                <div style={{ fontSize: 13, color: C.text, lineHeight: 1.7, fontFamily: FONT }}>{sel.summary || sel.desc}</div>
               </div>
 
               {/* Detailed Specs Table */}
               {sel.specs && sel.specs.length > 0 && (
                 <div style={{ marginBottom: 12 }}>
-                  <div style={{ fontSize: 8, color: C.amber, fontWeight: 700, letterSpacing: 1, marginBottom: 6, paddingLeft: 2, fontFamily: "monospace" }}>
+                  <div style={{ fontSize: 11, color: C.amber, fontWeight: 700, letterSpacing: 1, marginBottom: 6, paddingLeft: 2, fontFamily: FONT }}>
                     {"◆"} TEKNİK ÖZELLİKLER — DATASHEET
                   </div>
-                  <div style={{ borderRadius: 3, overflow: "hidden", border: `1px solid ${C.border}` }}>
+                  <div style={{ borderRadius: 5, overflow: "hidden", border: `1px solid ${C.border}` }}>
                     {sel.specs.map((s, j) => (
                       <div
                         key={j}
@@ -743,10 +743,10 @@ export default function HSEnvanter() {
                           background: j % 2 === 0 ? C.bg2 : "transparent",
                         }}
                       >
-                        <div style={{ padding: "6px 10px", fontSize: 9, fontWeight: 700, color: C.cyan, borderRight: `1px solid ${C.border}`, fontFamily: "monospace" }}>
+                        <div style={{ padding: "6px 10px", fontSize: 12, fontWeight: 700, color: C.cyan, borderRight: `1px solid ${C.border}`, fontFamily: FONT }}>
                           {s.k}
                         </div>
-                        <div style={{ padding: "6px 10px", fontSize: 9, color: C.text, lineHeight: 1.5, fontFamily: "monospace" }}>
+                        <div style={{ padding: "6px 10px", fontSize: 12, color: C.text, lineHeight: 1.5, fontFamily: FONT }}>
                           {s.v}
                         </div>
                       </div>
@@ -758,7 +758,7 @@ export default function HSEnvanter() {
               {/* Performance Bars */}
               {sel.range !== "—" && sel.range !== "" && (
                 <div style={{ marginBottom: 12 }}>
-                  <div style={{ fontSize: 8, color: C.purple, fontWeight: 700, letterSpacing: 1, marginBottom: 6, paddingLeft: 2, fontFamily: "monospace" }}>
+                  <div style={{ fontSize: 11, color: C.purple, fontWeight: 700, letterSpacing: 1, marginBottom: 6, paddingLeft: 2, fontFamily: FONT }}>
                     {"▸"} KABİLİYET GÖSTERGELERİ
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -770,12 +770,12 @@ export default function HSEnvanter() {
                       return (
                         <>
                           <div>
-                            <div style={{ fontSize: 8, color: C.textDim, marginBottom: 2, fontFamily: "monospace" }}>Menzil ({sel.range})</div>
+                            <div style={{ fontSize: 11, color: C.textDim, marginBottom: 2, fontFamily: FONT }}>Menzil ({sel.range})</div>
                             <SeverityBar value={Math.min(Math.round((rangeNum / maxRange) * 100), 100)} color={C.cyan} />
                           </div>
                           {altNum > 0 && (
                             <div>
-                              <div style={{ fontSize: 8, color: C.textDim, marginBottom: 2, fontFamily: "monospace" }}>İrtifa ({sel.altitude})</div>
+                              <div style={{ fontSize: 11, color: C.textDim, marginBottom: 2, fontFamily: FONT }}>İrtifa ({sel.altitude})</div>
                               <SeverityBar value={Math.min(Math.round((altNum / maxAlt) * 100), 100)} color={C.amber} />
                             </div>
                           )}
@@ -789,12 +789,12 @@ export default function HSEnvanter() {
               {/* Scenarios */}
               {sel.scenarios && sel.scenarios.length > 0 && (
                 <div style={{ marginBottom: 12 }}>
-                  <div style={{ fontSize: 8, color: C.green, fontWeight: 700, letterSpacing: 1, marginBottom: 6, paddingLeft: 2, fontFamily: "monospace" }}>
+                  <div style={{ fontSize: 11, color: C.green, fontWeight: 700, letterSpacing: 1, marginBottom: 6, paddingLeft: 2, fontFamily: FONT }}>
                     {"▸"} KULLANIM SENARYOLARI
                   </div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
                     {sel.scenarios.map((sc, j) => (
-                      <span key={j} style={{ fontSize: 8, padding: "3px 7px", background: `${C.green}10`, border: `1px solid ${C.green}25`, borderRadius: 2, color: C.text, fontWeight: 600 }}>{sc}</span>
+                      <span key={j} style={{ fontSize: 11, padding: "4px 8px", background: `${C.green}10`, border: `1px solid ${C.green}25`, borderRadius: 2, color: C.text, fontWeight: 600 }}>{sc}</span>
                     ))}
                   </div>
                 </div>
@@ -802,9 +802,9 @@ export default function HSEnvanter() {
 
               {/* Note */}
               {sel.note && (
-                <div style={{ background: `${C.amber}08`, borderRadius: 3, padding: "10px 12px", marginBottom: 12, border: `1px solid ${C.amber}20` }}>
-                  <div style={{ fontSize: 8, color: C.amber, fontWeight: 700, letterSpacing: 1, marginBottom: 4, fontFamily: "monospace" }}>{"◆"} NOT</div>
-                  <div style={{ fontSize: 10, color: C.text, lineHeight: 1.7, fontFamily: "monospace" }}>{sel.note}</div>
+                <div style={{ background: `${C.amber}08`, borderRadius: 5, padding: "10px 12px", marginBottom: 12, border: `1px solid ${C.amber}20` }}>
+                  <div style={{ fontSize: 11, color: C.amber, fontWeight: 700, letterSpacing: 1, marginBottom: 4, fontFamily: FONT }}>{"◆"} NOT</div>
+                  <div style={{ fontSize: 13, color: C.text, lineHeight: 1.7, fontFamily: FONT }}>{sel.note}</div>
                 </div>
               )}
 
@@ -813,8 +813,8 @@ export default function HSEnvanter() {
                 onClick={() => setSelectedId(null)}
                 style={{
                   marginTop: 6, width: "100%", padding: "7px", background: "transparent",
-                  border: `1px solid ${C.border}`, borderRadius: 3, color: C.textDim,
-                  fontSize: 9, fontFamily: "monospace", cursor: "pointer", fontWeight: 600, letterSpacing: 1,
+                  border: `1px solid ${C.border}`, borderRadius: 5, color: C.textDim,
+                  fontSize: 12, fontFamily: FONT, cursor: "pointer", fontWeight: 600, letterSpacing: 1,
                 }}
               >
                 {"✕"} KAPAT

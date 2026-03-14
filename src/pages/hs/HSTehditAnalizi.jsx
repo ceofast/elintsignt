@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { C, glow } from "../../theme";
+import { C, FONT, glow } from "../../theme";
 import { Panel, Badge, SeverityBar } from "../../components";
 
 const threats = [
@@ -47,14 +47,14 @@ export default function HSTehditAnalizi() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10, animation: "fadeUp 0.35s ease-out" }}>
       <Panel title="Tehdit Ciddiyet Seviyesi" glow={C.red}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {threats.map((t,i) => (
-            <div key={i} className="hov" onClick={() => setSelThreat(i)} style={{ padding: "8px 10px", borderRadius: 3, cursor: "pointer", transition: "all 0.2s", border: selThreat === i ? `1px solid ${C.amber}` : `1px solid ${C.border}`, background: selThreat === i ? C.panelHi : "transparent" }}>
+            <div key={i} className="hov" onClick={() => setSelThreat(i)} style={{ padding: "8px 10px", borderRadius: 5, cursor: "pointer", transition: "all 0.2s", border: selThreat === i ? `1px solid ${C.amber}` : `1px solid ${C.border}`, background: selThreat === i ? C.panelHi : "transparent" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
                 <span style={{ fontSize: 18 }}>{t.icon}</span>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: C.white }}>{t.name}</div>
-                  <div style={{ fontSize: 8, color: C.textDim }}>{t.desc}</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: C.white, fontFamily: FONT }}>{t.name}</div>
+                  <div style={{ fontSize: 11, color: C.textDim, fontFamily: FONT }}>{t.desc}</div>
                 </div>
                 <Badge color={t.severity > 85 ? C.red : t.severity > 75 ? C.amber : C.green}>SEV {t.severity}</Badge>
               </div>
@@ -70,9 +70,9 @@ export default function HSTehditAnalizi() {
             <div key={j} style={{ flex: 1, position: "relative" }}>
               <div style={{ background: `${layer.c}08`, border: `1px solid ${layer.c}25`, borderRadius: 4, padding: "10px 10px 8px", height: "100%" }}>
                 <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: layer.c, borderRadius: "4px 4px 0 0" }} />
-                <div style={{ fontSize: 9, fontWeight: 800, color: layer.c, letterSpacing: 1, marginBottom: 6 }}>{layer.l}</div>
+                <div style={{ fontSize: 12, fontWeight: 800, color: layer.c, letterSpacing: 1, marginBottom: 6, fontFamily: FONT }}>{layer.l}</div>
                 {layer.sys.map((s,k) => (
-                  <div key={k} style={{ fontSize: 9, color: C.text, padding: "3px 0", borderBottom: k < layer.sys.length - 1 ? `1px solid ${C.border}` : "none", lineHeight: 1.4 }}>
+                  <div key={k} style={{ fontSize: 12, color: C.text, fontFamily: FONT, padding: "3px 0", borderBottom: k < layer.sys.length - 1 ? `1px solid ${C.border}` : "none", lineHeight: 1.4 }}>
                     <span style={{ color: layer.c, marginRight: 4 }}>{"▸"}</span>{s}
                   </div>
                 ))}
@@ -84,7 +84,7 @@ export default function HSTehditAnalizi() {
       </Panel>
 
       <Panel title="HS Savunma Derinliği — İrtifa Katmanları" glow={C.green}>
-        <div style={{ display: "flex", gap: 0, borderRadius: 3, overflow: "hidden", border: `1px solid ${C.border}` }}>
+        <div style={{ display: "flex", gap: 0, borderRadius: 5, overflow: "hidden", border: `1px solid ${C.border}` }}>
           {[
             { l: "VSHORAD", r: "0–5 km", c: C.red, sys: "SUNGUR · KORKUT · GÖKDENİZ\nGÖKBERK · Oerlikon GDF" },
             { l: "SHORAD", r: "4–8 km", c: C.amber, sys: "HİSAR-A+ · KORKUT\nGÜRZ · SUNGUR Araç Üstü" },
@@ -93,9 +93,9 @@ export default function HSTehditAnalizi() {
           ].map((z,i) => (
             <div key={i} style={{ flex: 1, padding: "10px 8px", background: `${z.c}06`, borderRight: i < 3 ? `1px solid ${C.border}` : "none", position: "relative" }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg, ${z.c}60, ${z.c})` }} />
-              <div style={{ fontSize: 9, fontWeight: 800, color: z.c, letterSpacing: 1 }}>{z.l}</div>
-              <div style={{ fontSize: 14, fontWeight: 900, color: C.white, margin: "2px 0 6px" }}>{z.r}</div>
-              <div style={{ fontSize: 8, color: C.textDim, lineHeight: 1.6, whiteSpace: "pre-line" }}>{z.sys}</div>
+              <div style={{ fontSize: 12, fontWeight: 800, color: z.c, letterSpacing: 1 }}>{z.l}</div>
+              <div style={{ fontSize: 16, fontWeight: 900, color: C.white, margin: "2px 0 6px" }}>{z.r}</div>
+              <div style={{ fontSize: 11, color: C.textDim, lineHeight: 1.6, whiteSpace: "pre-line" }}>{z.sys}</div>
             </div>
           ))}
         </div>

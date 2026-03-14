@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { C, glow } from "../../theme";
+import { C, FONT, MONO, glow } from "../../theme";
 import { Panel, Badge, SeverityBar } from "../../components";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -395,24 +395,24 @@ export default function HSSenaryoMerkezi() {
               padding: "10px 12px", borderRadius: 4, cursor: "pointer", textAlign: "left",
               background: isSel ? `${sc.color}12` : C.panel,
               border: `1px solid ${isSel ? sc.color : C.border}`,
-              fontFamily: "monospace", transition: "all 0.2s",
+              fontFamily: FONT, transition: "all 0.2s",
               borderLeft: `4px solid ${isSel ? sc.color : C.border}`,
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
                 <span style={{ fontSize: 14, color: sc.color }}>{sc.icon}</span>
-                <span style={{ fontSize: 10, fontWeight: 900, color: isSel ? sc.color : C.text, letterSpacing: 0.5 }}>{sc.name}</span>
+                <span style={{ fontSize: 13, fontWeight: 900, color: isSel ? sc.color : C.text, letterSpacing: 0.5 }}>{sc.name}</span>
               </div>
               <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
                 {sc.layers.map((l, j) => (
                   <span key={j} style={{
-                    fontSize: 7, padding: "1px 5px", borderRadius: 2, fontWeight: 700,
+                    fontSize: 10, padding: "2px 6px", borderRadius: 2, fontWeight: 700,
                     background: `${layerColors[l] || C.textDim}20`,
                     color: layerColors[l] || C.textDim,
                     border: `1px solid ${layerColors[l] || C.textDim}40`,
                   }}>{l}</span>
                 ))}
                 <span style={{
-                  fontSize: 7, padding: "1px 5px", borderRadius: 2, fontWeight: 700, marginLeft: "auto",
+                  fontSize: 10, padding: "2px 6px", borderRadius: 2, fontWeight: 700, marginLeft: "auto",
                   background: sc.priority === "KRİTİK" ? `${C.red}20` : `${C.amber}20`,
                   color: sc.priority === "KRİTİK" ? C.red : C.amber,
                 }}>{sc.priority}</span>
@@ -430,12 +430,12 @@ export default function HSSenaryoMerkezi() {
             return (
               <div key={key} style={{
                 padding: "8px 10px", background: `${s.color}06`, border: `1px solid ${s.color}15`,
-                borderRadius: 3, borderLeft: `3px solid ${s.color}40`,
+                borderRadius: 5, borderLeft: `3px solid ${s.color}40`,
               }}>
-                <div style={{ fontSize: 7, color: s.color, fontWeight: 800, letterSpacing: 1, textTransform: "uppercase", marginBottom: 3 }}>
+                <div style={{ fontSize: 10, color: s.color, fontWeight: 800, letterSpacing: 1, textTransform: "uppercase", marginBottom: 3 }}>
                   {labels[key] || key}
                 </div>
-                <div style={{ fontSize: 9, color: C.text, fontFamily: "monospace", lineHeight: 1.4 }}>{val}</div>
+                <div style={{ fontSize: 12, color: C.text, fontFamily: MONO, lineHeight: 1.4 }}>{val}</div>
               </div>
             );
           })}
@@ -452,12 +452,12 @@ export default function HSSenaryoMerkezi() {
               {/* Faz Başlığı */}
               <div style={{
                 display: "flex", alignItems: "center", gap: 8, marginBottom: 8,
-                padding: "6px 12px", background: `${phase.color}10`, borderRadius: 3,
+                padding: "6px 12px", background: `${phase.color}10`, borderRadius: 5,
                 border: `1px solid ${phase.color}25`,
               }}>
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: phase.color, boxShadow: glow(phase.color, 6) }} />
-                <span style={{ fontSize: 10, fontWeight: 900, color: phase.color, letterSpacing: 1.5 }}>{phase.name}</span>
-                <span style={{ fontSize: 8, color: C.textDim, marginLeft: "auto" }}>{phase.steps.length} adım</span>
+                <span style={{ fontSize: 13, fontWeight: 900, color: phase.color, letterSpacing: 1.5 }}>{phase.name}</span>
+                <span style={{ fontSize: 11, color: C.textDim, marginLeft: "auto" }}>{phase.steps.length} adım</span>
               </div>
 
               {/* Adımlar */}
@@ -467,7 +467,7 @@ export default function HSSenaryoMerkezi() {
                     {/* Zaman */}
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: 55 }}>
                       <div style={{
-                        fontSize: 9, fontWeight: 900, color: phase.color, fontFamily: "monospace",
+                        fontSize: 12, fontWeight: 900, color: phase.color, fontFamily: MONO,
                         background: `${phase.color}12`, padding: "2px 6px", borderRadius: 2,
                         border: `1px solid ${phase.color}25`, whiteSpace: "nowrap",
                       }}>{step.time}</div>
@@ -478,19 +478,19 @@ export default function HSSenaryoMerkezi() {
                     {/* İçerik */}
                     <div style={{ flex: 1, paddingBottom: si < phase.steps.length - 1 ? 6 : 0 }}>
                       <div style={{
-                        padding: "7px 10px", borderRadius: 3,
+                        padding: "7px 10px", borderRadius: 5,
                         background: `${phase.color}05`, border: `1px solid ${phase.color}12`,
                         borderLeft: `3px solid ${phase.color}50`,
                       }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
-                          <div style={{ fontSize: 9, color: C.text, lineHeight: 1.4, flex: 1 }}>{step.event}</div>
+                          <div style={{ fontSize: 12, color: C.text, lineHeight: 1.4, flex: 1, fontFamily: FONT }}>{step.event}</div>
                           <span style={{
-                            fontSize: 7, fontWeight: 800, color: phase.color, fontFamily: "monospace",
+                            fontSize: 10, fontWeight: 800, color: phase.color, fontFamily: MONO,
                             background: `${phase.color}15`, padding: "2px 6px", borderRadius: 2,
                             whiteSpace: "nowrap", border: `1px solid ${phase.color}25`, flexShrink: 0,
                           }}>{step.system}</span>
                         </div>
-                        <div style={{ fontSize: 8, color: C.textDim, marginTop: 3, lineHeight: 1.4, fontStyle: "italic" }}>
+                        <div style={{ fontSize: 11, color: C.textDim, marginTop: 3, lineHeight: 1.4, fontStyle: "italic", fontFamily: FONT }}>
                           {step.detail}
                         </div>
                       </div>
@@ -507,25 +507,25 @@ export default function HSSenaryoMerkezi() {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
         <Panel title="Sistem Ataması" glow={s.color}>
           <div style={{ marginBottom: 10 }}>
-            <div style={{ fontSize: 8, fontWeight: 900, color: s.color, letterSpacing: 1.5, marginBottom: 5, textTransform: "uppercase" }}>Birincil Sistemler</div>
+            <div style={{ fontSize: 11, fontWeight: 900, color: s.color, letterSpacing: 1.5, marginBottom: 5, textTransform: "uppercase" }}>Birincil Sistemler</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
               {s.primary.map((p, j) => (
                 <span key={j} style={{
-                  fontSize: 9, padding: "3px 8px", borderRadius: 3, fontWeight: 700,
+                  fontSize: 12, padding: "4px 10px", borderRadius: 5, fontWeight: 700,
                   background: `${s.color}12`, border: `1px solid ${s.color}30`,
-                  color: C.white, fontFamily: "monospace",
+                  color: C.white, fontFamily: FONT,
                 }}>{p}</span>
               ))}
             </div>
           </div>
           <div>
-            <div style={{ fontSize: 8, fontWeight: 900, color: C.textDim, letterSpacing: 1.5, marginBottom: 5, textTransform: "uppercase" }}>İkincil / Destek</div>
+            <div style={{ fontSize: 11, fontWeight: 900, color: C.textDim, letterSpacing: 1.5, marginBottom: 5, textTransform: "uppercase" }}>İkincil / Destek</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
               {s.secondary.map((p, j) => (
                 <span key={j} style={{
-                  fontSize: 9, padding: "3px 8px", borderRadius: 3, fontWeight: 600,
+                  fontSize: 12, padding: "4px 10px", borderRadius: 5, fontWeight: 600,
                   background: `${C.textDim}10`, border: `1px solid ${C.border}`,
-                  color: C.textDim, fontFamily: "monospace",
+                  color: C.textDim, fontFamily: FONT,
                 }}>{p}</span>
               ))}
             </div>
@@ -535,15 +535,15 @@ export default function HSSenaryoMerkezi() {
         <Panel title="Maliyet Analizi" glow={C.amber}>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <div>
-              <div style={{ fontSize: 8, color: C.amber, fontWeight: 800, letterSpacing: 1, marginBottom: 3 }}>ANGAJMAN BAŞINA MALİYET</div>
-              <div style={{ fontSize: 9, color: C.text, fontFamily: "monospace", lineHeight: 1.5 }}>{s.costAnalysis.perKill}</div>
+              <div style={{ fontSize: 11, color: C.amber, fontWeight: 800, letterSpacing: 1, marginBottom: 3 }}>ANGAJMAN BAŞINA MALİYET</div>
+              <div style={{ fontSize: 12, color: C.text, fontFamily: MONO, lineHeight: 1.5 }}>{s.costAnalysis.perKill}</div>
             </div>
             <div>
-              <div style={{ fontSize: 8, color: C.cyan, fontWeight: 800, letterSpacing: 1, marginBottom: 3 }}>SALDIRI / SAVUNMA ORANI</div>
-              <div style={{ fontSize: 9, color: C.text, fontFamily: "monospace", lineHeight: 1.5 }}>{s.costAnalysis.ratio}</div>
+              <div style={{ fontSize: 11, color: C.cyan, fontWeight: 800, letterSpacing: 1, marginBottom: 3 }}>SALDIRI / SAVUNMA ORANI</div>
+              <div style={{ fontSize: 12, color: C.text, fontFamily: MONO, lineHeight: 1.5 }}>{s.costAnalysis.ratio}</div>
             </div>
-            <div style={{ padding: "6px 8px", background: `${C.amber}08`, borderRadius: 3, border: `1px solid ${C.amber}15` }}>
-              <div style={{ fontSize: 8, color: C.amber, fontFamily: "monospace", lineHeight: 1.5 }}>{s.costAnalysis.note}</div>
+            <div style={{ padding: "6px 8px", background: `${C.amber}08`, borderRadius: 5, border: `1px solid ${C.amber}15` }}>
+              <div style={{ fontSize: 11, color: C.amber, fontFamily: FONT, lineHeight: 1.5 }}>{s.costAnalysis.note}</div>
             </div>
           </div>
         </Panel>
@@ -551,21 +551,21 @@ export default function HSSenaryoMerkezi() {
 
       {/* ── Taktik Değerlendirme ──────────────────────────── */}
       <Panel title="Taktik Değerlendirme" glow={C.amber}>
-        <div style={{ fontSize: 9, color: C.text, lineHeight: 1.8, fontFamily: "monospace", marginBottom: 12 }}>
+        <div style={{ fontSize: 12, color: C.text, lineHeight: 1.8, fontFamily: FONT, marginBottom: 12 }}>
           {s.tactics}
         </div>
 
         {/* Kritik Başarı Faktörleri */}
         <div style={{
-          padding: "10px 12px", background: `${C.red}06`, borderRadius: 3,
+          padding: "10px 12px", background: `${C.red}06`, borderRadius: 5,
           border: `1px solid ${C.red}15`, marginBottom: 12,
         }}>
-          <div style={{ fontSize: 8, fontWeight: 900, color: C.red, letterSpacing: 1.5, marginBottom: 6, textTransform: "uppercase" }}>Kritik Başarı Faktörleri</div>
+          <div style={{ fontSize: 11, fontWeight: 900, color: C.red, letterSpacing: 1.5, marginBottom: 6, textTransform: "uppercase" }}>Kritik Başarı Faktörleri</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
             {s.criticalFactors.map((f, i) => (
               <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 6 }}>
-                <span style={{ color: C.red, fontSize: 8, marginTop: 1 }}>▸</span>
-                <span style={{ fontSize: 9, color: C.text, fontFamily: "monospace", lineHeight: 1.4 }}>{f}</span>
+                <span style={{ color: C.red, fontSize: 11, marginTop: 1 }}>▸</span>
+                <span style={{ fontSize: 12, color: C.text, fontFamily: FONT, lineHeight: 1.4 }}>{f}</span>
               </div>
             ))}
           </div>
@@ -573,15 +573,15 @@ export default function HSSenaryoMerkezi() {
 
         {/* Gerçek Dünya Referansları */}
         <div style={{
-          padding: "10px 12px", background: `${C.cyan}06`, borderRadius: 3,
+          padding: "10px 12px", background: `${C.cyan}06`, borderRadius: 5,
           border: `1px solid ${C.cyan}15`,
         }}>
-          <div style={{ fontSize: 8, fontWeight: 900, color: C.cyan, letterSpacing: 1.5, marginBottom: 6, textTransform: "uppercase" }}>Gerçek Dünya Referansları</div>
+          <div style={{ fontSize: 11, fontWeight: 900, color: C.cyan, letterSpacing: 1.5, marginBottom: 6, textTransform: "uppercase" }}>Gerçek Dünya Referansları</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
             {s.realWorld.map((r, i) => (
               <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 6 }}>
-                <span style={{ color: C.cyan, fontSize: 8, marginTop: 1 }}>◆</span>
-                <span style={{ fontSize: 9, color: C.text, fontFamily: "monospace", lineHeight: 1.4 }}>{r}</span>
+                <span style={{ color: C.cyan, fontSize: 11, marginTop: 1 }}>◆</span>
+                <span style={{ fontSize: 12, color: C.text, fontFamily: FONT, lineHeight: 1.4 }}>{r}</span>
               </div>
             ))}
           </div>
@@ -617,18 +617,18 @@ function SystemScenarioMatrix({ scenarios }) {
 
   return (
     <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "monospace", fontSize: 8 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONT, fontSize: 11 }}>
         <thead>
           <tr>
             <th style={{
               textAlign: "left", padding: "6px 8px", borderBottom: `1px solid ${C.border}`,
-              color: C.textDim, fontSize: 8, letterSpacing: 1, position: "sticky", left: 0,
+              color: C.textDim, fontSize: 11, letterSpacing: 1, position: "sticky", left: 0,
               background: C.panel, zIndex: 1, minWidth: 100,
             }}>SİSTEM</th>
             {scenarios.map((sc, i) => (
               <th key={i} style={{
                 textAlign: "center", padding: "6px 4px", borderBottom: `1px solid ${C.border}`,
-                color: sc.color, fontSize: 7, fontWeight: 900, minWidth: 55, lineHeight: 1.3,
+                color: sc.color, fontSize: 10, fontWeight: 900, minWidth: 55, lineHeight: 1.3,
               }}>
                 <div>{sc.icon}</div>
                 <div style={{ marginTop: 2 }}>{sc.name.split(" ").slice(0, 2).join(" ")}</div>
@@ -641,7 +641,7 @@ function SystemScenarioMatrix({ scenarios }) {
             <tr key={si} style={{ background: si % 2 === 0 ? "transparent" : `${C.border}15` }}>
               <td style={{
                 padding: "5px 8px", borderBottom: `1px solid ${C.border}20`,
-                color: C.text, fontWeight: 700, fontSize: 9, position: "sticky", left: 0,
+                color: C.text, fontWeight: 700, fontSize: 12, position: "sticky", left: 0,
                 background: si % 2 === 0 ? C.panel : C.panelHi, zIndex: 1,
               }}>{sys}</td>
               {scenarios.map((sc, sci) => {

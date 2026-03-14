@@ -1,5 +1,5 @@
 import { ResponsiveContainer, Treemap } from "recharts";
-import { C, glow, forceColor } from "../../theme";
+import { C, FONT, MONO, glow, forceColor } from "../../theme";
 import { Panel, ForceTag, TreeCell } from "../../components";
 
 const treemapData = [
@@ -47,7 +47,7 @@ export default function HSPlatformPortfoy() {
         </ResponsiveContainer>
         <div style={{ display: "flex", justifyContent: "center", gap: 14, marginTop: 8 }}>
           {[["KARA",C.kara],["HAVA",C.hava],["DENİZ",C.deniz],["AR-GE",C.arge]].map(([l,c],i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 9 }}>
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12 }}>
               <div style={{ width: 10, height: 10, borderRadius: 2, background: c, boxShadow: glow(c, 4) }} /> <span style={{ color: C.textDim }}>{l}</span>
             </div>
           ))}
@@ -59,16 +59,16 @@ export default function HSPlatformPortfoy() {
           {platforms.map((p,i) => {
             const fc = forceColor(p.f);
             return (
-              <div key={i} className="hov" style={{ background: `${fc}06`, border: `1px solid ${fc}20`, borderRadius: 3, padding: "8px 10px", cursor: "default", transition: "all 0.2s" }}>
+              <div key={i} className="hov" style={{ background: `${fc}06`, border: `1px solid ${fc}20`, borderRadius: 5, padding: "8px 10px", cursor: "default", transition: "all 0.2s" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 5 }}>
                   <div style={{ width: 4, height: 4, borderRadius: "50%", background: fc, boxShadow: glow(fc, 6) }} />
-                  <span style={{ fontSize: 10, fontWeight: 800, color: C.white }}>{p.name}</span>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: C.white, fontFamily: FONT }}>{p.name}</span>
                   <ForceTag force={p.f} />
-                  <span style={{ marginLeft: "auto", fontSize: 9, fontWeight: 800, color: fc }}>{p.count}</span>
+                  <span style={{ marginLeft: "auto", fontSize: 12, fontWeight: 800, color: fc, fontFamily: MONO }}>{p.count}</span>
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
                   {p.sys.map((s,j) => (
-                    <span key={j} style={{ fontSize: 7, padding: "2px 4px", background: `${fc}12`, border: `1px solid ${fc}25`, borderRadius: 2, color: C.text }}>{s}</span>
+                    <span key={j} style={{ fontSize: 10, padding: "3px 6px", background: `${fc}12`, border: `1px solid ${fc}25`, borderRadius: 2, color: C.text }}>{s}</span>
                   ))}
                 </div>
               </div>
@@ -86,9 +86,9 @@ export default function HSPlatformPortfoy() {
         ].map((x,i) => (
           <Panel key={i} glow={x.c}>
             <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 7, color: C.textDim, letterSpacing: 1, textTransform: "uppercase" }}>{x.l}</div>
-              <div style={{ fontSize: 16, fontWeight: 900, color: x.c, textShadow: glow(x.c) }}>{x.v}</div>
-              <div style={{ fontSize: 7, color: C.textDim }}>{x.s}</div>
+              <div style={{ fontSize: 10, color: C.textDim, letterSpacing: 1, fontFamily: FONT, textTransform: "uppercase" }}>{x.l}</div>
+              <div style={{ fontSize: 18, fontWeight: 900, color: x.c, fontFamily: MONO, textShadow: glow(x.c) }}>{x.v}</div>
+              <div style={{ fontSize: 10, color: C.textDim, fontFamily: FONT }}>{x.s}</div>
             </div>
           </Panel>
         ))}

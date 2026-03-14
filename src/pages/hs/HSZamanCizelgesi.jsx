@@ -1,5 +1,5 @@
 import { ResponsiveContainer, AreaChart, Area, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
-import { C, glow, ttStyle, forceColor } from "../../theme";
+import { C, FONT, MONO, glow, ttStyle, forceColor } from "../../theme";
 import { Panel, ForceTag } from "../../components";
 
 const growthData = [
@@ -64,8 +64,8 @@ export default function HSZamanCizelgesi() {
           <AreaChart data={growthData} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
             <defs><linearGradient id="gHStime" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={C.amber} stopOpacity={0.25} /><stop offset="100%" stopColor={C.amber} stopOpacity={0.02} /></linearGradient></defs>
             <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
-            <XAxis dataKey="year" tick={{ fill: C.textDim, fontSize: 9, fontFamily: "monospace" }} stroke={C.border} />
-            <YAxis tick={{ fill: C.textDim, fontSize: 9, fontFamily: "monospace" }} stroke={C.border} />
+            <XAxis dataKey="year" tick={{ fill: C.textDim, fontSize: 11, fontFamily: "Inter, sans-serif" }} stroke={C.border} />
+            <YAxis tick={{ fill: C.textDim, fontSize: 11, fontFamily: "Inter, sans-serif" }} stroke={C.border} />
             <Tooltip contentStyle={ttStyle} />
             <Area type="monotone" dataKey="systems" stroke={C.amber} strokeWidth={2} fill="url(#gHStime)" dot={{ r: 3, fill: C.amber, stroke: C.bg, strokeWidth: 2 }} name="Sistem Sayısı" />
           </AreaChart>
@@ -82,11 +82,11 @@ export default function HSZamanCizelgesi() {
               <div key={i} style={{ position: "relative", marginBottom: 6, paddingBottom: 6, borderBottom: `1px solid ${C.border}`, opacity: future ? 0.6 : 1, animation: `fadeUp 0.3s ease-out ${i * 0.04}s both` }}>
                 <div style={{ position: "absolute", left: -29, top: 1, width: item.imp >= 5 ? 14 : 10, height: item.imp >= 5 ? 14 : 10, borderRadius: "50%", background: fc, border: `2px solid ${C.panel}`, boxShadow: item.imp >= 5 ? glow(fc, 12) : "none" }} />
                 <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-                  <span style={{ fontSize: 12, fontWeight: 900, color: C.amber, minWidth: 32, fontFamily: "monospace" }}>{item.y}</span>
+                  <span style={{ fontSize: 14, fontWeight: 900, color: C.amber, minWidth: 32, fontFamily: MONO }}>{item.y}</span>
                   <ForceTag force={item.f} />
-                  {item.imp >= 5 && <span style={{ fontSize: 7, color: C.amber, fontWeight: 700, background: `${C.amber}15`, padding: "1px 4px", borderRadius: 2 }}>{"★"} DÖNÜM NOKTASI</span>}
-                  <span style={{ fontSize: 10, color: C.text }}>{item.e}</span>
-                  {future && <span style={{ fontSize: 7, color: C.amber, fontWeight: 700, marginLeft: "auto", background: `${C.amber}12`, padding: "1px 5px", borderRadius: 2, border: `1px solid ${C.amber}30` }}>HEDEF</span>}
+                  {item.imp >= 5 && <span style={{ fontSize: 10, color: C.amber, fontWeight: 700, background: `${C.amber}15`, padding: "1px 4px", borderRadius: 2 }}>{"★"} DÖNÜM NOKTASI</span>}
+                  <span style={{ fontSize: 13, color: C.text, fontFamily: FONT }}>{item.e}</span>
+                  {future && <span style={{ fontSize: 10, color: C.amber, fontWeight: 700, marginLeft: "auto", background: `${C.amber}12`, padding: "1px 5px", borderRadius: 2, border: `1px solid ${C.amber}30` }}>HEDEF</span>}
                 </div>
               </div>
             );
@@ -102,31 +102,31 @@ export default function HSZamanCizelgesi() {
         ].map((m, i) => (
           <Panel key={i} glow={m.c}>
             <div style={{ fontSize: 28, fontWeight: 900, color: m.c, textShadow: glow(m.c) }}>{m.y}</div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: C.white, margin: "2px 0" }}>{m.t}</div>
-            <div style={{ fontSize: 8, color: C.textDim, lineHeight: 1.5 }}>{m.d}</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: C.white, margin: "2px 0" }}>{m.t}</div>
+            <div style={{ fontSize: 11, color: C.textDim, lineHeight: 1.5 }}>{m.d}</div>
           </Panel>
         ))}
       </div>
 
       <Panel title="Tedarik Sözleşmeleri" glow={C.amber}>
         <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "monospace", fontSize: 9 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONT, fontSize: 12 }}>
             <thead>
               <tr style={{ borderBottom: `1px solid ${C.borderHi}` }}>
                 {["Sözleşme", "Değer", "Taraflar", "Yıl", "Durum"].map(h => (
-                  <th key={h} style={{ padding: "6px 8px", textAlign: "left", color: C.textDim, fontWeight: 700, fontSize: 8, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
+                  <th key={h} style={{ padding: "6px 8px", textAlign: "left", color: C.textDim, fontWeight: 700, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {contracts.map((c, i) => (
                 <tr key={i} style={{ borderBottom: `1px solid ${C.border}` }}>
-                  <td style={{ padding: "6px 8px", color: C.white, fontWeight: 700, fontSize: 9 }}>{c.name}</td>
-                  <td style={{ padding: "6px 8px", color: C.amber, fontWeight: 900, fontSize: 11 }}>{c.value}</td>
-                  <td style={{ padding: "6px 8px", color: C.text, fontSize: 8 }}>{c.parties}</td>
-                  <td style={{ padding: "6px 8px", color: C.textDim, fontSize: 9 }}>{c.year}</td>
+                  <td style={{ padding: "6px 8px", color: C.white, fontWeight: 700, fontSize: 12, fontFamily: FONT }}>{c.name}</td>
+                  <td style={{ padding: "6px 8px", color: C.amber, fontWeight: 900, fontSize: 13, fontFamily: MONO }}>{c.value}</td>
+                  <td style={{ padding: "6px 8px", color: C.text, fontSize: 11, fontFamily: FONT }}>{c.parties}</td>
+                  <td style={{ padding: "6px 8px", color: C.textDim, fontSize: 12, fontFamily: MONO }}>{c.year}</td>
                   <td style={{ padding: "6px 8px" }}>
-                    <span style={{ display: "inline-block", padding: "1px 6px", borderRadius: 2, fontSize: 7, fontWeight: 700, color: "#fff", background: statusColor(c.status), letterSpacing: 0.5 }}>{c.status}</span>
+                    <span style={{ display: "inline-block", padding: "1px 6px", borderRadius: 2, fontSize: 10, fontWeight: 700, color: "#fff", background: statusColor(c.status), letterSpacing: 0.5 }}>{c.status}</span>
                   </td>
                 </tr>
               ))}

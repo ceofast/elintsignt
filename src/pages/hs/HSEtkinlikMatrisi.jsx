@@ -1,5 +1,5 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
-import { C, ttStyle } from "../../theme";
+import { C, FONT, ttStyle } from "../../theme";
 import { Panel, HeatCell } from "../../components";
 
 const heatmapSystems = [
@@ -39,12 +39,12 @@ export default function HSEtkinlikMatrisi() {
           <div style={{ display: "inline-block", minWidth: 600 }}>
             <div style={{ display: "flex", gap: 2, marginBottom: 3, paddingLeft: 100 }}>
               {heatmapThreats.map((s, i) => (
-                <div key={i} style={{ width: 28, textAlign: "center", fontSize: 7, color: C.textDim, fontWeight: 600, transform: "rotate(-45deg)", transformOrigin: "center", height: 28, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>{s}</div>
+                <div key={i} style={{ width: 28, textAlign: "center", fontSize: 10, color: C.textDim, fontWeight: 600, transform: "rotate(-45deg)", transformOrigin: "center", height: 28, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>{s}</div>
               ))}
             </div>
             {heatmapSystems.map((sys, i) => (
               <div key={i} style={{ display: "flex", gap: 2, alignItems: "center", marginBottom: 2 }}>
-                <div style={{ width: 96, fontSize: 9, fontWeight: 700, color: C.white, textAlign: "right", paddingRight: 4, whiteSpace: "nowrap" }}>{sys.name}</div>
+                <div style={{ width: 96, fontSize: 12, fontWeight: 700, color: C.white, textAlign: "right", paddingRight: 4, whiteSpace: "nowrap" }}>{sys.name}</div>
                 {sys.s.map((v, j) => <HeatCell key={j} v={v} />)}
               </div>
             ))}
@@ -56,7 +56,7 @@ export default function HSEtkinlikMatrisi() {
             { l: "Orta (31-70)", bg: "rgba(255,179,0,0.35)" },
             { l: "Yüksek (71-100)", bg: "rgba(0,229,255,0.55)" },
           ].map((x, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 9 }}>
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12, fontFamily: FONT }}>
               <div style={{ width: 14, height: 10, background: x.bg, borderRadius: 1, border: `1px solid ${C.border}` }} />
               <span style={{ color: C.textDim }}>{x.l}</span>
             </div>
@@ -68,14 +68,14 @@ export default function HSEtkinlikMatrisi() {
         <ResponsiveContainer width="100%" height={200}>
           <BarChart data={threatScenario} margin={{ left: 0, right: 10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
-            <XAxis dataKey="t" tick={{ fill: C.textDim, fontSize: 8, fontFamily: "monospace" }} stroke={C.border} />
-            <YAxis tick={{ fill: C.textDim, fontSize: 9, fontFamily: "monospace" }} stroke={C.border} />
+            <XAxis dataKey="t" tick={{ fill: C.textDim, fontSize: 11, fontFamily: "Inter, sans-serif" }} stroke={C.border} />
+            <YAxis tick={{ fill: C.textDim, fontSize: 11, fontFamily: "Inter, sans-serif" }} stroke={C.border} />
             <Tooltip contentStyle={ttStyle} />
             <Bar dataKey="vshorad" stackId="a" fill={C.red} name="VSHORAD" />
             <Bar dataKey="shorad" stackId="a" fill={C.amber} name="SHORAD" />
             <Bar dataKey="mrad" stackId="a" fill={C.cyan} name="MRAD" />
             <Bar dataKey="lrad" stackId="a" fill={C.purple} name="LRAD" radius={[3, 3, 0, 0]} />
-            <Legend wrapperStyle={{ fontSize: 9, fontFamily: "monospace" }} />
+            <Legend wrapperStyle={{ fontSize: 11, fontFamily: "Inter, sans-serif" }} />
           </BarChart>
         </ResponsiveContainer>
       </Panel>

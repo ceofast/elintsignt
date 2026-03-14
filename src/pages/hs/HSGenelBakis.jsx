@@ -1,5 +1,5 @@
 import { ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
-import { C, glow, ttStyle, forceColor } from "../../theme";
+import { C, FONT, MONO, glow, ttStyle, forceColor } from "../../theme";
 import { Panel, Stat, ForceTag } from "../../components";
 
 const forceData = [
@@ -77,8 +77,8 @@ export default function HSGenelBakis() {
               borderRadius: 4, borderLeft: `4px solid ${layer.color}`,
             }}>
               <div style={{ minWidth: 70 }}>
-                <div style={{ fontSize: 11, fontWeight: 900, color: layer.color }}>{layer.name}</div>
-                <div style={{ fontSize: 9, color: C.textDim }}>{layer.range}</div>
+                <div style={{ fontSize: 13, fontWeight: 900, color: layer.color, fontFamily: FONT }}>{layer.name}</div>
+                <div style={{ fontSize: 12, color: C.textDim, fontFamily: MONO }}>{layer.range}</div>
               </div>
               <div style={{
                 flex: 1, height: 8, background: C.border, borderRadius: 4, overflow: "hidden", position: "relative",
@@ -89,19 +89,19 @@ export default function HSGenelBakis() {
                   borderRadius: 4, boxShadow: glow(layer.color, 6),
                 }} />
               </div>
-              <div style={{ fontSize: 8, color: C.text, minWidth: 160, textAlign: "right" }}>{layer.systems}</div>
+              <div style={{ fontSize: 11, color: C.text, minWidth: 160, textAlign: "right", fontFamily: FONT }}>{layer.systems}</div>
             </div>
           ))}
         </div>
         <div style={{ textAlign: "center", marginTop: 10 }}>
-          <span style={{ fontSize: 8, color: C.amber, fontWeight: 700, background: `${C.amber}12`, padding: "3px 10px", borderRadius: 3, border: `1px solid ${C.amber}25` }}>
+          <span style={{ fontSize: 11, color: C.amber, fontWeight: 700, background: `${C.amber}12`, padding: "4px 12px", borderRadius: 4, border: `1px solid ${C.amber}25`, fontFamily: FONT }}>
             HERİKKS C4I ile entegre · Yapay zekâ destekli karar destek
           </span>
         </div>
       </Panel>
 
       {/* Charts Row */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
         <Panel title="Kuvvet Dağılımı" glow={C.cyan}>
           <ResponsiveContainer width="100%" height={180}>
             <PieChart>
@@ -113,7 +113,7 @@ export default function HSGenelBakis() {
           </ResponsiveContainer>
           <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 4 }}>
             {forceData.map((d, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 8 }}>
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11 }}>
                 <div style={{ width: 8, height: 8, borderRadius: 2, background: d.fill }} />
                 <span style={{ color: C.textDim }}>{d.name.split(" ")[0]} ({d.value})</span>
               </div>
@@ -132,7 +132,7 @@ export default function HSGenelBakis() {
           </ResponsiveContainer>
           <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 4 }}>
             {statusData.map((d, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 8 }}>
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11 }}>
                 <div style={{ width: 8, height: 8, borderRadius: 2, background: d.fill }} />
                 <span style={{ color: C.textDim }}>{d.name} ({d.value})</span>
               </div>
@@ -152,8 +152,8 @@ export default function HSGenelBakis() {
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
-            <XAxis dataKey="year" tick={{ fill: C.textDim, fontSize: 9, fontFamily: "monospace" }} stroke={C.border} />
-            <YAxis tick={{ fill: C.textDim, fontSize: 9, fontFamily: "monospace" }} stroke={C.border} />
+            <XAxis dataKey="year" tick={{ fill: C.textDim, fontSize: 11, fontFamily: "Inter, sans-serif" }} stroke={C.border} />
+            <YAxis tick={{ fill: C.textDim, fontSize: 11, fontFamily: "Inter, sans-serif" }} stroke={C.border} />
             <Tooltip contentStyle={ttStyle} />
             <Area type="monotone" dataKey="systems" stroke={C.amber} strokeWidth={2} fill="url(#gHS)" dot={{ r: 3, fill: C.amber, stroke: C.bg, strokeWidth: 2 }} name="Sistem Sayısı" />
           </AreaChart>
@@ -164,10 +164,10 @@ export default function HSGenelBakis() {
       <Panel title="Ana Sanayii Kuruluşları" glow={C.cyan}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
           {producers.map((p, i) => (
-            <div key={i} className="hov" style={{ background: `${C.cyan}06`, border: `1px solid ${C.border}`, borderRadius: 3, padding: "10px", textAlign: "center", cursor: "default", transition: "all 0.2s" }}>
+            <div key={i} className="hov" style={{ background: `${C.cyan}06`, border: `1px solid ${C.border}`, borderRadius: 5, padding: "10px", textAlign: "center", cursor: "default", transition: "all 0.2s" }}>
               <div style={{ fontSize: 12, fontWeight: 900, color: C.white }}>{p.name}</div>
               <div style={{ fontSize: 20, fontWeight: 900, color: C.cyan, textShadow: glow(C.cyan), margin: "4px 0" }}>{p.count}</div>
-              <div style={{ fontSize: 7, color: C.textDim }}>{p.role}</div>
+              <div style={{ fontSize: 10, color: C.textDim }}>{p.role}</div>
             </div>
           ))}
         </div>
@@ -179,8 +179,8 @@ export default function HSGenelBakis() {
           {keyContracts.map((c, i) => (
             <div key={i} style={{ background: `${c.color}06`, border: `1px solid ${c.color}20`, borderRadius: 4, padding: "12px 10px", textAlign: "center" }}>
               <div style={{ fontSize: 22, fontWeight: 900, color: c.color, textShadow: glow(c.color) }}>{c.value}</div>
-              <div style={{ fontSize: 8, fontWeight: 700, color: C.white, margin: "4px 0" }}>{c.label}</div>
-              <div style={{ fontSize: 7, color: C.textDim }}>{c.year}</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: C.white, margin: "4px 0", fontFamily: FONT }}>{c.label}</div>
+              <div style={{ fontSize: 10, color: C.textDim }}>{c.year}</div>
             </div>
           ))}
         </div>
@@ -196,9 +196,9 @@ export default function HSGenelBakis() {
         ].map((x, i) => (
           <Panel key={i} glow={x.c}>
             <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 7, color: C.textDim, letterSpacing: 1, textTransform: "uppercase" }}>{x.l}</div>
+              <div style={{ fontSize: 10, color: C.textDim, letterSpacing: 1, textTransform: "uppercase" }}>{x.l}</div>
               <div style={{ fontSize: 16, fontWeight: 900, color: x.c, textShadow: glow(x.c) }}>{x.v}</div>
-              <div style={{ fontSize: 7, color: C.textDim }}>{x.s}</div>
+              <div style={{ fontSize: 10, color: C.textDim }}>{x.s}</div>
             </div>
           </Panel>
         ))}

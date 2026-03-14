@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import * as d3 from "d3";
-import { C, glow } from "../../theme";
+import { C, FONT, MONO, glow } from "../../theme";
 import { Panel } from "../../components";
 import { turkeyBorder, neighborCountries } from "../../data/turkeyGeo";
 
@@ -487,7 +487,7 @@ export default function HSMenzilHaritasi() {
         <circle key={`ring-${ri}`} cx={PC} cy={PC} r={r} fill="none" stroke={C.border} strokeWidth={0.5} strokeDasharray="3,3" />
       );
       items.push(
-        <text key={`rl-${ri}`} x={PC + 4} y={PC - r + 10} fill={C.textDim} fontSize={7} fontFamily="monospace">
+        <text key={`rl-${ri}`} x={PC + 4} y={PC - r + 10} fill={C.textDim} fontSize={13} fontFamily="Inter, sans-serif">
           {Math.round(ri / NUM_RANGE * maxRange)} km
         </text>
       );
@@ -512,7 +512,7 @@ export default function HSMenzilHaritasi() {
       const r = PC - 14;
       items.push(
         <text key={`dir-${d.l}`} x={PC + r * Math.cos(rad)} y={PC + r * Math.sin(rad) + 3}
-          textAnchor="middle" fill={C.textDim} fontSize={9} fontWeight="700" fontFamily="monospace">{d.l}</text>
+          textAnchor="middle" fill={C.textDim} fontSize={9} fontWeight="700" fontFamily="Inter, sans-serif">{d.l}</text>
       );
     });
 
@@ -533,7 +533,7 @@ export default function HSMenzilHaritasi() {
             placeholder="İl adı ara..."
             style={{
               width: "100%", padding: "6px 10px", background: C.bg, border: `1px solid ${C.border}`,
-              borderRadius: 3, color: C.white, fontSize: 11, fontFamily: "monospace", outline: "none",
+              borderRadius: 5, color: C.white, fontSize: 13, fontFamily: FONT, outline: "none",
               marginBottom: 6, boxSizing: "border-box",
             }}
           />
@@ -544,8 +544,8 @@ export default function HSMenzilHaritasi() {
               return (
                 <button key={origIdx} onClick={() => handleSelect(il, selSys)}
                   style={{
-                    padding: "3px 7px", borderRadius: 3, fontSize: 8, fontWeight: isSel ? 800 : 600,
-                    fontFamily: "monospace", cursor: "pointer", border: `1px solid ${isSel ? C.amber : C.border}`,
+                    padding: "3px 7px", borderRadius: 5, fontSize: 11, fontWeight: isSel ? 800 : 600,
+                    fontFamily: FONT, cursor: "pointer", border: `1px solid ${isSel ? C.amber : C.border}`,
                     background: isSel ? `${C.amber}20` : C.bg, color: isSel ? C.amber : C.text,
                     transition: "all 0.15s",
                   }}
@@ -564,14 +564,14 @@ export default function HSMenzilHaritasi() {
               return (
                 <button key={i} onClick={() => handleSelect(selIl, sys)}
                   style={{
-                    padding: "5px 10px", borderRadius: 3, fontSize: 9, fontWeight: isSel ? 800 : 600,
-                    fontFamily: "monospace", cursor: "pointer", border: `1px solid ${isSel ? sys.color : C.border}`,
+                    padding: "5px 10px", borderRadius: 5, fontSize: 12, fontWeight: isSel ? 800 : 600,
+                    fontFamily: FONT, cursor: "pointer", border: `1px solid ${isSel ? sys.color : C.border}`,
                     background: isSel ? `${sys.color}20` : C.bg, color: isSel ? sys.color : C.text,
                     transition: "all 0.15s",
                   }}
                 >
                   <div>{sys.name}</div>
-                  <div style={{ fontSize: 7, color: C.textDim, marginTop: 1 }}>{sys.type} · {sys.detRange} km</div>
+                  <div style={{ fontSize: 10, color: C.textDim, marginTop: 1 }}>{sys.type} · {sys.detRange} km</div>
                 </button>
               );
             })}
@@ -610,7 +610,7 @@ export default function HSMenzilHaritasi() {
                     const pt = mProj(country.center);
                     return pt ? (
                       <text x={pt[0]} y={pt[1]} textAnchor="middle" fill={C.textMute} fontSize={Math.max(4, 7/mZoom)}
-                        fontWeight="600" fontFamily="monospace" opacity={0.6}
+                        fontWeight="600" fontFamily="Inter, sans-serif" opacity={0.6}
                         stroke={C.bg} strokeWidth={Math.max(0.5, 1.5/mZoom)} paintOrder="stroke"
                       >{country.label}</text>
                     ) : null;
@@ -630,7 +630,7 @@ export default function HSMenzilHaritasi() {
                     <circle cx={pt[0]} cy={pt[1]} r={Math.max(0.3, 0.7/mZoom)} fill={C.cyan} opacity={0.5} />
                     {mZoom > 5 && (
                       <text x={pt[0]} y={pt[1] - 1.5/mZoom} textAnchor="middle"
-                        fill={C.cyan} fontSize={Math.max(2, 3.5/mZoom)} fontFamily="monospace" opacity={0.6}
+                        fill={C.cyan} fontSize={Math.max(2, 3.5/mZoom)} fontFamily="Inter, sans-serif" opacity={0.6}
                         stroke={C.bg} strokeWidth={Math.max(0.3, 0.8/mZoom)} paintOrder="stroke"
                       >{d[2]}</text>
                     )}
@@ -656,7 +656,7 @@ export default function HSMenzilHaritasi() {
                     {(isSel || isHov || mZoom > 2) && (
                       <text x={pt[0]} y={pt[1] - r - 2/mZoom} textAnchor="middle"
                         fill={isSel ? C.amber : C.text} fontSize={Math.max(3, (isSel ? 7 : 5) / mZoom)}
-                        fontWeight="700" fontFamily="monospace"
+                        fontWeight="700" fontFamily="Inter, sans-serif"
                         stroke={C.bg} strokeWidth={Math.max(0.5, 1.5/mZoom)} paintOrder="stroke"
                       >{il.ad}</text>
                     )}
@@ -667,7 +667,7 @@ export default function HSMenzilHaritasi() {
 
             {/* Zoom göstergesi */}
             <rect x={4} y={MH-18} width={50} height={14} rx={2} fill={`${C.panel}cc`} stroke={C.border} strokeWidth={0.5} />
-            <text x={29} y={MH-8} textAnchor="middle" fill={C.textDim} fontSize={8} fontFamily="monospace">{mZoom.toFixed(1)}x</text>
+            <text x={29} y={MH-8} textAnchor="middle" fill={C.textDim} fontSize={11} fontFamily="Inter, sans-serif">{mZoom.toFixed(1)}x</text>
           </svg>
         </Panel>
 
@@ -692,16 +692,16 @@ export default function HSMenzilHaritasi() {
               {/* Kapsama hücreleri */}
               {loading ? (
                 <>
-                  <text x={PC} y={PC + 20} textAnchor="middle" fill={C.amber} fontSize={12} fontFamily="monospace">
+                  <text x={PC} y={PC + 20} textAnchor="middle" fill={C.amber} fontSize={13} fontFamily="Inter, sans-serif">
                     Yükleniyor...
                   </text>
-                  <text x={PC} y={PC + 38} textAnchor="middle" fill={C.textDim} fontSize={9} fontFamily="monospace">
+                  <text x={PC} y={PC + 38} textAnchor="middle" fill={C.textDim} fontSize={11} fontFamily="Inter, sans-serif">
                     {loadProgress}
                   </text>
                 </>
               ) : error ? (
                 <>
-                  <text x={PC} y={PC + 20} textAnchor="middle" fill={C.red} fontSize={10} fontFamily="monospace">
+                  <text x={PC} y={PC + 20} textAnchor="middle" fill={C.red} fontSize={13} fontFamily="Inter, sans-serif">
                     {error}
                   </text>
                   <foreignObject x={PC - 50} y={PC + 32} width={100} height={30}>
@@ -709,7 +709,7 @@ export default function HSMenzilHaritasi() {
                       onClick={() => { if (selIl && selSys) handleSelect(selIl, selSys); }}
                       style={{
                         width: "100%", padding: "4px 0", background: `${C.red}20`, border: `1px solid ${C.red}50`,
-                        borderRadius: 3, color: C.red, fontSize: 9, fontWeight: 700, fontFamily: "monospace",
+                        borderRadius: 5, color: C.red, fontSize: 12, fontWeight: 700, fontFamily: FONT,
                         cursor: "pointer",
                       }}
                     >
@@ -720,7 +720,7 @@ export default function HSMenzilHaritasi() {
               ) : coverage ? (
                 polarCells
               ) : (
-                <text x={PC} y={PC + 30} textAnchor="middle" fill={C.textDim} fontSize={10} fontFamily="monospace">
+                <text x={PC} y={PC + 30} textAnchor="middle" fill={C.textDim} fontSize={13} fontFamily="Inter, sans-serif">
                   İl ve radar seçimi yapın
                 </text>
               )}
@@ -747,7 +747,7 @@ export default function HSMenzilHaritasi() {
                     background: x.c, opacity: x.o,
                     border: x.border ? `1px solid ${C.border}` : "none",
                   }} />
-                  <span style={{ fontSize: 7, color: C.textDim, fontFamily: "monospace" }}>{x.l}</span>
+                  <span style={{ fontSize: 10, color: C.textDim, fontFamily: FONT }}>{x.l}</span>
                 </div>
               ))}
             </div>
@@ -767,8 +767,8 @@ export default function HSMenzilHaritasi() {
           ].map((x, i) => (
             <Panel key={i} glow={x.c}>
               <div style={{ textAlign: "center" }}>
-                <div style={{ fontSize: 7, color: C.textDim, letterSpacing: 1, textTransform: "uppercase", fontFamily: "monospace" }}>{x.l}</div>
-                <div style={{ fontSize: 14, fontWeight: 900, color: x.c, textShadow: glow(x.c), fontFamily: "monospace" }}>{x.v}</div>
+                <div style={{ fontSize: 10, color: C.textDim, letterSpacing: 1, textTransform: "uppercase", fontFamily: FONT }}>{x.l}</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: x.c, textShadow: glow(x.c), fontFamily: MONO }}>{x.v}</div>
               </div>
             </Panel>
           ))}
@@ -778,7 +778,7 @@ export default function HSMenzilHaritasi() {
       {/* Seçili il bilgisi */}
       {selIl && (
         <Panel title={`${selIl.ad} — KONUM BİLGİSİ`} glow={C.amber}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, fontSize: 9, fontFamily: "monospace" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, fontSize: 12, fontFamily: FONT }}>
             <div>
               <span style={{ color: C.textDim }}>Enlem: </span>
               <span style={{ color: C.white, fontWeight: 700 }}>{selIl.lat.toFixed(2)}°N</span>
@@ -801,8 +801,8 @@ export default function HSMenzilHaritasi() {
 
       {/* Alt bilgi */}
       <div style={{
-        fontSize: 7, padding: "6px 10px", background: C.panel, borderRadius: 4,
-        border: `1px solid ${C.border}`, fontFamily: "monospace", color: C.textDim,
+        fontSize: 10, padding: "8px 12px", background: C.panel, borderRadius: 4,
+        border: `1px solid ${C.border}`, fontFamily: FONT, color: C.textDim,
         display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4,
       }}>
         <div><span style={{ color: C.green }}>{"●"}</span> Yeşil = Güdüm | <span style={{ color: C.amber }}>{"●"}</span> Amber = Takip | <span style={{ color: C.red }}>{"●"}</span> Kırmızı = Tespit</div>

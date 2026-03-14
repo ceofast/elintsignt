@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { C, glow, forceColor } from "../../theme";
+import { C, FONT, MONO, glow, forceColor } from "../../theme";
 import { Panel, Badge, SeverityBar } from "../../components";
 
 /* ── Data ─────────────────────────────────────────────────────── */
@@ -25,7 +25,7 @@ const layers = [
     systems: [
       { name: "KORKUT", type: "SPAAG / Füze", range: "4 km (top) / 8 km (füze)", alt: "5 km", note: "35 mm ikiz, HİSAR-A+ entegre" },
       { name: "HİSAR-A+", type: "Kısa Menzil SAM", range: "15 km", alt: "6 km", note: "ASELSAN ÇAFRAD radarı ile" },
-      { name: "GÜRZ", type: "Lazer Güdümlü", range: "8 km", alt: "5 km", note: "Hafif platform, hızlı konuş" },
+      { name: "GÜRZ", type: "Lazer Güdümlü", range: "8 km", alt: "5 km", note: "Hafif platform, hızlı konuşlanma" },
     ],
     threats: [true, true, true, false, false],
   },
@@ -258,7 +258,7 @@ const BatteryArchCard = ({ arch }) => {
 
   return (
     <Panel title={`${arch.name} — ${arch.fullName}`} sub={`${arch.layer} · ${arch.range} · ${arch.producers.join(" / ")}`} glow={arch.color}>
-      <div style={{ fontSize: 9, color: C.textDim, fontFamily: "monospace", marginBottom: 10, lineHeight: 1.5 }}>
+      <div style={{ fontSize: 12, color: C.textDim, fontFamily: FONT, marginBottom: 10, lineHeight: 1.5 }}>
         {arch.description}
       </div>
 
@@ -269,23 +269,23 @@ const BatteryArchCard = ({ arch }) => {
           const icon = catIcons[comp.cat] || "·";
 
           return (
-            <div key={ci} style={{ border: `1px solid ${isOpen ? cc : C.border}40`, borderRadius: 3, overflow: "hidden", transition: "border-color 0.2s" }}>
+            <div key={ci} style={{ border: `1px solid ${isOpen ? cc : C.border}40`, borderRadius: 5, overflow: "hidden", transition: "border-color 0.2s" }}>
               <button
                 onClick={() => setOpenCat(isOpen ? null : ci)}
                 style={{
                   display: "flex", alignItems: "center", gap: 8, width: "100%",
                   padding: "8px 12px", border: "none", cursor: "pointer",
                   background: isOpen ? `${cc}10` : `${C.bg}80`,
-                  fontFamily: "monospace", textAlign: "left", transition: "all 0.2s",
+                  fontFamily: FONT, textAlign: "left", transition: "all 0.2s",
                 }}
               >
                 <span style={{ fontSize: 10, color: cc }}>{icon}</span>
-                <span style={{ fontSize: 9, fontWeight: 800, color: isOpen ? cc : C.text, letterSpacing: 1, flex: 1 }}>
+                <span style={{ fontSize: 12, fontWeight: 800, color: isOpen ? cc : C.text, letterSpacing: 1, flex: 1 }}>
                   {comp.cat}
                 </span>
                 <Badge color={cc}>{comp.items.length}</Badge>
                 <span style={{
-                  fontSize: 8, color: cc, fontWeight: 900,
+                  fontSize: 11, color: cc, fontWeight: 900,
                   transform: isOpen ? "rotate(90deg)" : "rotate(0deg)",
                   transition: "transform 0.2s", display: "inline-block",
                 }}>&#9656;</span>
@@ -299,17 +299,17 @@ const BatteryArchCard = ({ arch }) => {
                 <div style={{ padding: "4px 8px 8px", display: "flex", flexDirection: "column", gap: 4 }}>
                   {comp.items.map((item, ii) => (
                     <div key={ii} style={{
-                      background: `${cc}06`, border: `1px solid ${cc}15`, borderRadius: 3,
+                      background: `${cc}06`, border: `1px solid ${cc}15`, borderRadius: 5,
                       padding: "8px 10px", borderLeft: `3px solid ${cc}60`,
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 3 }}>
-                        <span style={{ fontSize: 11, fontWeight: 900, color: cc, fontFamily: "monospace" }}>{item.name}</span>
-                        <span style={{ fontSize: 7, color: C.textDim, fontFamily: "monospace", background: `${C.border}40`, padding: "1px 6px", borderRadius: 2 }}>{item.qty}</span>
+                        <span style={{ fontSize: 11, fontWeight: 900, color: cc, fontFamily: MONO }}>{item.name}</span>
+                        <span style={{ fontSize: 10, color: C.textDim, fontFamily: MONO, background: `${C.border}40`, padding: "1px 6px", borderRadius: 2 }}>{item.qty}</span>
                       </div>
-                      <div style={{ fontSize: 8, color: C.text, fontFamily: "monospace", fontWeight: 700, marginBottom: 2 }}>{item.role}</div>
-                      <div style={{ fontSize: 8, color: C.textDim, fontFamily: "monospace", lineHeight: 1.4 }}>{item.detail}</div>
+                      <div style={{ fontSize: 11, color: C.text, fontFamily: FONT, fontWeight: 700, marginBottom: 2 }}>{item.role}</div>
+                      <div style={{ fontSize: 11, color: C.textDim, fontFamily: FONT, lineHeight: 1.4 }}>{item.detail}</div>
                       {item.producer && item.producer !== "—" && (
-                        <div style={{ fontSize: 7, color: `${cc}90`, fontFamily: "monospace", marginTop: 3, letterSpacing: 0.5 }}>
+                        <div style={{ fontSize: 10, color: `${cc}90`, fontFamily: FONT, marginTop: 3, letterSpacing: 0.5 }}>
                           Üretici: {item.producer}
                         </div>
                       )}
@@ -376,20 +376,20 @@ const AltRangeDiagram = () => {
       <line x1={originX} y1={originY} x2={originX} y2={toY(maxAlt)} stroke={C.borderHi} strokeWidth={1.5} />
 
       {/* Axis labels */}
-      <text x={toX(maxRange / 2)} y={H - 8} textAnchor="middle" fill={C.textDim} fontSize={9} fontFamily="monospace" fontWeight={700}>
+      <text x={toX(maxRange / 2)} y={H - 8} textAnchor="middle" fill={C.textDim} fontSize={11} fontFamily="Inter, sans-serif" fontWeight={700}>
         MENZİL (km)
       </text>
-      <text x={14} y={toY(maxAlt / 2)} textAnchor="middle" fill={C.textDim} fontSize={9} fontFamily="monospace" fontWeight={700} transform={`rotate(-90,14,${toY(maxAlt / 2)})`}>
+      <text x={14} y={toY(maxAlt / 2)} textAnchor="middle" fill={C.textDim} fontSize={11} fontFamily="Inter, sans-serif" fontWeight={700} transform={`rotate(-90,14,${toY(maxAlt / 2)})`}>
         İRTİFA (km)
       </text>
 
       {/* Range ticks */}
       {gridRanges.map(r => (
-        <text key={`tr${r}`} x={toX(r)} y={originY + 14} textAnchor="middle" fill={C.textDim} fontSize={7} fontFamily="monospace">{r}</text>
+        <text key={`tr${r}`} x={toX(r)} y={originY + 14} textAnchor="middle" fill={C.textDim} fontSize={10} fontFamily="Inter, sans-serif">{r}</text>
       ))}
       {/* Altitude ticks */}
       {gridAlts.map(a => (
-        <text key={`ta${a}`} x={originX - 8} y={toY(a) + 3} textAnchor="end" fill={C.textDim} fontSize={7} fontFamily="monospace">{a}</text>
+        <text key={`ta${a}`} x={originX - 8} y={toY(a) + 3} textAnchor="end" fill={C.textDim} fontSize={10} fontFamily="Inter, sans-serif">{a}</text>
       ))}
 
       {/* Layer arcs (drawn as filled elliptical sections from origin) */}
@@ -421,7 +421,7 @@ const AltRangeDiagram = () => {
               fill={l.color}
               fontSize={10}
               fontWeight={900}
-              fontFamily="monospace"
+              fontFamily="Inter, sans-serif"
               style={{ textShadow: `0 0 8px ${l.color}` }}
             >
               {l.label}
@@ -433,7 +433,7 @@ const AltRangeDiagram = () => {
               textAnchor="middle"
               fill={`${l.color}aa`}
               fontSize={7}
-              fontFamily="monospace"
+              fontFamily="Inter, sans-serif"
             >
               {l.rMin}–{l.rMax} km
             </text>
@@ -445,7 +445,7 @@ const AltRangeDiagram = () => {
       <circle cx={originX} cy={originY} r={4} fill={C.green} stroke={C.bg} strokeWidth={2}>
         <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite" />
       </circle>
-      <text x={originX} y={originY + 24} textAnchor="middle" fill={C.green} fontSize={7} fontFamily="monospace" fontWeight={700}>
+      <text x={originX} y={originY + 24} textAnchor="middle" fill={C.green} fontSize={10} fontFamily="Inter, sans-serif" fontWeight={700}>
         SAVUNMA MERKEZİ
       </text>
 
@@ -460,18 +460,18 @@ const AltRangeDiagram = () => {
 
 const SystemCard = ({ system, color }) => (
   <div style={{
-    background: `${color}08`, border: `1px solid ${color}20`, borderRadius: 3,
+    background: `${color}08`, border: `1px solid ${color}20`, borderRadius: 5,
     padding: "8px 10px", borderLeft: `3px solid ${color}`,
   }}>
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
-      <span style={{ fontSize: 11, fontWeight: 900, color, fontFamily: "monospace" }}>{system.name}</span>
+      <span style={{ fontSize: 11, fontWeight: 900, color, fontFamily: MONO }}>{system.name}</span>
       <Badge color={color}>{system.type}</Badge>
     </div>
-    <div style={{ display: "flex", gap: 14, fontSize: 8, color: C.textDim, fontFamily: "monospace" }}>
+    <div style={{ display: "flex", gap: 14, fontSize: 11, color: C.textDim, fontFamily: FONT }}>
       <span>Menzil: <span style={{ color: C.text, fontWeight: 700 }}>{system.range}</span></span>
       <span>İrtifa: <span style={{ color: C.text, fontWeight: 700 }}>{system.alt}</span></span>
     </div>
-    <div style={{ fontSize: 7, color: C.textDim, marginTop: 3, fontFamily: "monospace", fontStyle: "italic" }}>{system.note}</div>
+    <div style={{ fontSize: 10, color: C.textDim, marginTop: 3, fontFamily: FONT, fontStyle: "italic" }}>{system.note}</div>
   </div>
 );
 
@@ -481,7 +481,7 @@ const FlowArrow = ({ from, to, color }) => (
   <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
     <div style={{
       padding: "5px 10px", background: `${color}15`, border: `1px solid ${color}40`,
-      borderRadius: 3, fontSize: 9, fontWeight: 800, color, fontFamily: "monospace",
+      borderRadius: 5, fontSize: 12, fontWeight: 800, color, fontFamily: FONT,
       whiteSpace: "nowrap",
     }}>
       {from}
@@ -496,7 +496,7 @@ const FlowArrow = ({ from, to, color }) => (
     </div>
     <div style={{
       padding: "5px 10px", background: `${color}15`, border: `1px solid ${color}40`,
-      borderRadius: 3, fontSize: 9, fontWeight: 800, color, fontFamily: "monospace",
+      borderRadius: 5, fontSize: 12, fontWeight: 800, color, fontFamily: FONT,
       whiteSpace: "nowrap",
     }}>
       {to}
@@ -516,12 +516,12 @@ export default function HSKatmanliSavunma() {
           <Panel key={i} glow={s.color}>
             <div style={{ textAlign: "center", padding: "8px 4px" }}>
               <div style={{
-                fontFamily: "monospace", fontSize: 22, fontWeight: 900, color: s.color,
+                fontFamily: MONO, fontSize: 22, fontWeight: 900, color: s.color,
                 lineHeight: 1, textShadow: glow(s.color),
               }}>
                 {s.value}
               </div>
-              <div style={{ fontSize: 8, color: C.textDim, marginTop: 4, fontFamily: "monospace", letterSpacing: 0.5 }}>
+              <div style={{ fontSize: 11, color: C.textDim, marginTop: 4, fontFamily: FONT, letterSpacing: 0.5 }}>
                 {s.sub}
               </div>
             </div>
@@ -538,7 +538,7 @@ export default function HSKatmanliSavunma() {
         <AltRangeDiagram />
         <div style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 8 }}>
           {layers.map((l, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 8, fontFamily: "monospace" }}>
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, fontFamily: FONT }}>
               <div style={{ width: 10, height: 10, borderRadius: 2, background: l.color, boxShadow: glow(l.color, 6) }} />
               <span style={{ color: C.text, fontWeight: 700 }}>{l.name}</span>
               <span style={{ color: C.textDim }}>{l.range}</span>
@@ -568,7 +568,7 @@ export default function HSKatmanliSavunma() {
                 <SystemCard key={j} system={sys} color={layer.color} />
               ))}
               <div style={{ marginTop: 2 }}>
-                <div style={{ fontSize: 8, color: C.textDim, marginBottom: 3, fontFamily: "monospace" }}>KATMAN KAPSAMA</div>
+                <div style={{ fontSize: 11, color: C.textDim, marginBottom: 3, fontFamily: FONT }}>KATMAN KAPSAMA</div>
                 <SeverityBar value={layer.arcPct} color={layer.color} />
               </div>
             </div>
@@ -585,7 +585,7 @@ export default function HSKatmanliSavunma() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
           {/* Sensors */}
           <div>
-            <div style={{ fontSize: 9, fontWeight: 900, color: C.purple, letterSpacing: 1.5, marginBottom: 8, fontFamily: "monospace", textTransform: "uppercase" }}>
+            <div style={{ fontSize: 12, fontWeight: 900, color: C.purple, letterSpacing: 1.5, marginBottom: 8, fontFamily: FONT, textTransform: "uppercase" }}>
               Sensörler
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -593,10 +593,10 @@ export default function HSKatmanliSavunma() {
                 <div key={i} style={{
                   display: "flex", justifyContent: "space-between", alignItems: "center",
                   padding: "7px 10px", background: `${s.color}08`, border: `1px solid ${s.color}20`,
-                  borderRadius: 3, borderLeft: `3px solid ${s.color}`,
+                  borderRadius: 5, borderLeft: `3px solid ${s.color}`,
                 }}>
-                  <span style={{ fontSize: 11, fontWeight: 900, color: s.color, fontFamily: "monospace" }}>{s.name}</span>
-                  <span style={{ fontSize: 9, color: C.textDim, fontFamily: "monospace" }}>{s.range}</span>
+                  <span style={{ fontSize: 11, fontWeight: 900, color: s.color, fontFamily: MONO }}>{s.name}</span>
+                  <span style={{ fontSize: 12, color: C.textDim, fontFamily: MONO }}>{s.range}</span>
                 </div>
               ))}
             </div>
@@ -604,7 +604,7 @@ export default function HSKatmanliSavunma() {
 
           {/* Command Flow */}
           <div>
-            <div style={{ fontSize: 9, fontWeight: 900, color: C.cyan, letterSpacing: 1.5, marginBottom: 8, fontFamily: "monospace", textTransform: "uppercase" }}>
+            <div style={{ fontSize: 12, fontWeight: 900, color: C.cyan, letterSpacing: 1.5, marginBottom: 8, fontFamily: FONT, textTransform: "uppercase" }}>
               Komuta Zinciri
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "center" }}>
@@ -616,7 +616,7 @@ export default function HSKatmanliSavunma() {
 
           {/* Effector Chain */}
           <div>
-            <div style={{ fontSize: 9, fontWeight: 900, color: C.amber, letterSpacing: 1.5, marginBottom: 8, fontFamily: "monospace", textTransform: "uppercase" }}>
+            <div style={{ fontSize: 12, fontWeight: 900, color: C.amber, letterSpacing: 1.5, marginBottom: 8, fontFamily: FONT, textTransform: "uppercase" }}>
               Effektör Zinciri
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -627,10 +627,10 @@ export default function HSKatmanliSavunma() {
                     <div style={{
                       display: "flex", alignItems: "center", gap: 8,
                       padding: "7px 10px", background: `${lyr.color}08`, border: `1px solid ${lyr.color}20`,
-                      borderRadius: 3, borderLeft: `3px solid ${lyr.color}`,
+                      borderRadius: 5, borderLeft: `3px solid ${lyr.color}`,
                     }}>
-                      <span style={{ fontSize: 11, fontWeight: 900, color: lyr.color, fontFamily: "monospace" }}>{e}</span>
-                      <span style={{ fontSize: 8, color: C.textDim, fontFamily: "monospace" }}>{lyr.range}</span>
+                      <span style={{ fontSize: 11, fontWeight: 900, color: lyr.color, fontFamily: MONO }}>{e}</span>
+                      <span style={{ fontSize: 11, color: C.textDim, fontFamily: MONO }}>{lyr.range}</span>
                     </div>
                     {i < effectorChain.length - 1 && (
                       <div style={{ display: "flex", justifyContent: "center", padding: "2px 0" }}>
@@ -647,8 +647,8 @@ export default function HSKatmanliSavunma() {
         {/* Integration footer */}
         <div style={{ textAlign: "center", marginTop: 12 }}>
           <span style={{
-            fontSize: 8, color: C.cyan, fontWeight: 700, fontFamily: "monospace",
-            background: `${C.cyan}12`, padding: "3px 12px", borderRadius: 3, border: `1px solid ${C.cyan}25`,
+            fontSize: 11, color: C.cyan, fontWeight: 700, fontFamily: FONT,
+            background: `${C.cyan}12`, padding: "3px 12px", borderRadius: 5, border: `1px solid ${C.cyan}25`,
           }}>
             HERİKKS → HAKİM → Müşterek Hava Resmi → Otonom Ateş Kontrol
           </span>
@@ -662,16 +662,16 @@ export default function HSKatmanliSavunma() {
         glow={C.red}
       >
         <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "monospace", fontSize: 10 }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONT, fontSize: 13 }}>
             <thead>
               <tr>
-                <th style={{ textAlign: "left", padding: "6px 10px", borderBottom: `1px solid ${C.border}`, color: C.textDim, fontSize: 8, letterSpacing: 1 }}>
+                <th style={{ textAlign: "left", padding: "6px 10px", borderBottom: `1px solid ${C.border}`, color: C.textDim, fontSize: 11, letterSpacing: 1 }}>
                   TEHDİT SINIFI
                 </th>
                 {layers.map((l, i) => (
                   <th key={i} style={{
                     textAlign: "center", padding: "6px 10px", borderBottom: `1px solid ${C.border}`,
-                    color: l.color, fontSize: 9, fontWeight: 900,
+                    color: l.color, fontSize: 12, fontWeight: 900,
                   }}>
                     {l.name}
                   </th>
@@ -703,11 +703,11 @@ export default function HSKatmanliSavunma() {
         </div>
         {/* Matrix legend */}
         <div style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 8 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 8, fontFamily: "monospace" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, fontFamily: FONT }}>
             <span style={{ color: C.green, fontSize: 12, fontWeight: 900 }}>&#10003;</span>
             <span style={{ color: C.textDim }}>Etkili kapsama</span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 8, fontFamily: "monospace" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, fontFamily: FONT }}>
             <span style={{ color: C.red, fontSize: 12, fontWeight: 900, opacity: 0.6 }}>&#10007;</span>
             <span style={{ color: C.textDim }}>Kapsama dışı</span>
           </div>
