@@ -654,7 +654,7 @@ export default function HSEnvanter() {
       </div>
 
       {/* Main Content: List + Detail */}
-      <div style={{ display: "grid", gridTemplateColumns: sel ? "320px 1fr" : "1fr", gap: 10, minHeight: 500 }}>
+      <div className="rg-sidebar" style={{ display: "grid", gridTemplateColumns: sel ? "320px 1fr" : "1fr", gap: 10, minHeight: 500 }}>
         {/* System List */}
         <Panel
           title="SİSTEM ENVANTERİ"

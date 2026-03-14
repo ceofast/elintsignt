@@ -387,7 +387,7 @@ export default function HSSenaryoMerkezi() {
     <div style={{ display: "flex", flexDirection: "column", gap: 10, animation: "fadeUp 0.35s ease-out" }}>
 
       {/* ── Senaryo Seçim Kartları ─────────────────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6 }}>
+      <div className="rg-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6 }}>
         {scenarios.map((sc, i) => {
           const isSel = selIdx === i;
           return (
@@ -424,7 +424,7 @@ export default function HSSenaryoMerkezi() {
 
       {/* ── Tehdit Profili ─────────────────────────────────── */}
       <Panel title="Tehdit Profili" sub={s.threatProfile.type} glow={s.color}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
+        <div className="rg-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
           {Object.entries(s.threatProfile).filter(([k]) => k !== "type").map(([key, val]) => {
             const labels = { count: "Adet/Miktar", speed: "Hız", altitude: "İrtifa", rcs: "Radar Kesiti (RCS)", ecm: "ECM Kabiliyeti", cost: "Birim Maliyet", examples: "Gerçek Örnekler" };
             return (
@@ -504,7 +504,7 @@ export default function HSSenaryoMerkezi() {
       </Panel>
 
       {/* ── Sistem Listeleri + Maliyet ─────────────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
         <Panel title="Sistem Ataması" glow={s.color}>
           <div style={{ marginBottom: 10 }}>
             <div style={{ fontSize: 11, fontWeight: 900, color: s.color, letterSpacing: 1.5, marginBottom: 5, textTransform: "uppercase" }}>Birincil Sistemler</div>

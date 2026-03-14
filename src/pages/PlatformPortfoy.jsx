@@ -54,7 +54,7 @@ export default function PlatformPortfoy() {
       </Panel>
 
       <Panel title="Platform x EH Sistem Entegrasyonu" sub={`Her platformda entegre EH sistemleri — toplam ${platforms.reduce((a,p)=>a+p.count,0)} entegrasyon noktası`} glow={C.amber}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+        <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
           {platforms.map((p,i) => {
             const fc = forceColor(p.f);
             return (
@@ -76,7 +76,7 @@ export default function PlatformPortfoy() {
         </div>
       </Panel>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10 }}>
+      <div className="rg-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10 }}>
         {[
           { l: "İHA-EH Liderliği", v: "DÜNYA #1", s: "ANTIDOT ailesi rakipsiz", c: C.hava },
           { l: "İstif Yerlilik", v: "%80", s: "EH sistemlerinde", c: C.deniz },

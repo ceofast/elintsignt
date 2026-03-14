@@ -52,7 +52,7 @@ export default function HSGenelBakis() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10, animation: "fadeUp 0.35s ease-out" }}>
       {/* Top Stats */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
+      <div className="rg-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
         <Panel glow={C.amber}>
           <Stat label="Yerli Sistem" value="21" unit="+" color={C.amber} />
         </Panel>
@@ -101,7 +101,7 @@ export default function HSGenelBakis() {
       </Panel>
 
       {/* Charts Row */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
         <Panel title="Kuvvet Dağılımı" glow={C.cyan}>
           <ResponsiveContainer width="100%" height={180}>
             <PieChart>
@@ -162,7 +162,7 @@ export default function HSGenelBakis() {
 
       {/* Producers */}
       <Panel title="Ana Sanayii Kuruluşları" glow={C.cyan}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
+        <div className="rg-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
           {producers.map((p, i) => (
             <div key={i} className="hov" style={{ background: `${C.cyan}06`, border: `1px solid ${C.border}`, borderRadius: 5, padding: "10px", textAlign: "center", cursor: "default", transition: "all 0.2s" }}>
               <div style={{ fontSize: 12, fontWeight: 900, color: C.white }}>{p.name}</div>
@@ -175,7 +175,7 @@ export default function HSGenelBakis() {
 
       {/* Key Contracts */}
       <Panel title="Kritik Sözleşmeler" sub="Hava savunma alanındaki büyük tedarik sözleşmeleri" glow={C.amber}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
+        <div className="rg-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
           {keyContracts.map((c, i) => (
             <div key={i} style={{ background: `${c.color}06`, border: `1px solid ${c.color}20`, borderRadius: 4, padding: "12px 10px", textAlign: "center" }}>
               <div style={{ fontSize: 22, fontWeight: 900, color: c.color, textShadow: glow(c.color) }}>{c.value}</div>
@@ -187,7 +187,7 @@ export default function HSGenelBakis() {
       </Panel>
 
       {/* Bottom Stats */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
+      <div className="rg-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
         {[
           { l: "HAWK Değiştirme", v: "HİSAR-O+", s: "MIM-23 envanter çıkışı", c: C.kara },
           { l: "S-400 Durumu", v: "PASİF", s: "F-35 programı için iade görüşmeleri", c: C.red },

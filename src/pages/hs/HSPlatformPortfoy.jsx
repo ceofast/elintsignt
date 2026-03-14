@@ -55,7 +55,7 @@ export default function HSPlatformPortfoy() {
       </Panel>
 
       <Panel title="Platform x HS Sistem Entegrasyonu" sub={`Her platformda entegre hava savunma sistemleri — toplam ${platforms.reduce((a,p)=>a+p.count,0)} entegrasyon noktası`} glow={C.cyan}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+        <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
           {platforms.map((p,i) => {
             const fc = forceColor(p.f);
             return (
@@ -77,7 +77,7 @@ export default function HSPlatformPortfoy() {
         </div>
       </Panel>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
+      <div className="rg-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
         {[
           { l: "Çelik Kubbe", v: "47 Parça", s: "Ağustos 2025 ilk teslimat", c: C.amber },
           { l: "Sözleşme Değeri", v: "$6.5B", s: "Toplam yatırım", c: C.cyan },

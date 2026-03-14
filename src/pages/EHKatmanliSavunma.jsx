@@ -438,7 +438,7 @@ export default function EHKatmanliSavunma() {
     <div style={{ display: "flex", flexDirection: "column", gap: 14, animation: "fadeUp 0.35s ease-out" }}>
 
       {/* Stats */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10 }}>
+      <div className="rg-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10 }}>
         {stats.map((s, i) => (
           <Panel key={i} glow={s.color}>
             <div style={{ textAlign: "center", padding: "10px 6px" }}>
@@ -468,14 +468,14 @@ export default function EHKatmanliSavunma() {
       </Panel>
 
       {/* Battery Architectures */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         {batteryArchitectures.map(arch => (
           <BatteryArchCard key={arch.id} arch={arch} />
         ))}
       </div>
 
       {/* System Cards per Layer */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         {layers.map((layer, i) => (
           <Panel key={i} title={`${layer.label} — ${layer.name}`} sub={`Menzil: ${layer.range} · Spektrum: ${layer.spectrum}`} glow={layer.color}>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -493,7 +493,7 @@ export default function EHKatmanliSavunma() {
 
       {/* Integration Architecture */}
       <Panel title="EHKKKS C2 — Entegrasyon Mimarisi" sub="Sensörden effektöre kadar elektronik harp komuta-kontrol veri akışı" glow={C.cyan}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
+        <div className="rg-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
           <div>
             <div style={{ fontSize: 12, fontWeight: 800, color: C.purple, letterSpacing: 1.5, marginBottom: 10, fontFamily: FONT, textTransform: "uppercase" }}>
               Sensörler

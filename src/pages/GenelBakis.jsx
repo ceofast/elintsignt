@@ -27,7 +27,7 @@ export default function GenelBakis() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 14, animation: "fadeUp 0.35s ease-out" }}>
       <Panel glow={C.cyan}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 4 }}>
+        <div className="rg-6" style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 4 }}>
           <Stat label="Toplam Sistem" value="83" unit="+" big />
           <Stat label="ASELSAN Gelir" value="4.11" unit="B$" color={C.amber} big />
           <Stat label="Sipariş Defteri" value="20.4" unit="B$" color={C.green} big />
@@ -37,7 +37,7 @@ export default function GenelBakis() {
         </div>
       </Panel>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
         <Panel title="Kuvvet Bazlı Dağılım" glow={C.cyan}>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart><Pie data={forceData} cx="50%" cy="50%" innerRadius={48} outerRadius={80} dataKey="value" stroke={C.bg} strokeWidth={3}>
@@ -106,7 +106,7 @@ export default function GenelBakis() {
         </ResponsiveContainer>
       </Panel>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
+      <div className="rg-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
         {[
           { icon: "📡", t: "Radar EH", n: "6", d: "KORAL, VURAL, KORAL 200", c: C.hava },
           { icon: "📻", t: "Haberleşme EH", n: "10+", d: "İLGAR, SANCAK, GERGEDAN", c: C.kara },

@@ -433,7 +433,7 @@ export default function Datasheet() {
         ))}
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: sel ? "320px 1fr" : "1fr", gap: 14, minHeight: 500 }}>
+      <div className="rg-sidebar" style={{ display: "grid", gridTemplateColumns: sel ? "320px 1fr" : "1fr", gap: 14, minHeight: 500 }}>
         <Panel title="ÜRÜN LİSTESİ" sub={dsSearch || dsForce ? `${dsForce ? dsForce.toUpperCase() : "TÜMÜ"}${dsSearch ? ` · "${dsSearch}"` : ""}` : `${productDB.length} sistem`} glow={C.cyan} noPad>
           <div style={{ padding: 0, maxHeight: sel ? 620 : 700, overflowY: "auto" }}>
             {filtered.length === 0 ? (

@@ -524,7 +524,7 @@ export default function HSMenzilHaritasi() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8, animation: "fadeUp 0.35s ease-out" }}>
       {/* Üst seçim barı */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
         <Panel title="İL SEÇİMİ" glow={C.amber}>
           <input
             type="text"
@@ -580,7 +580,7 @@ export default function HSMenzilHaritasi() {
       </div>
 
       {/* Ana içerik */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
         {/* Sol: Türkiye haritası */}
         <Panel title="TÜRKİYE HARİTASI" sub={selectedIl ? `Seçili: ${selectedIl.ad} (${selectedIl.rak}m)` : "Bir il seçin"} glow={C.amber} noPad>
           <svg
@@ -778,7 +778,7 @@ export default function HSMenzilHaritasi() {
       {/* Seçili il bilgisi */}
       {selIl && (
         <Panel title={`${selIl.ad} — KONUM BİLGİSİ`} glow={C.amber}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, fontSize: 12, fontFamily: FONT }}>
+          <div className="rg-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, fontSize: 12, fontFamily: FONT }}>
             <div>
               <span style={{ color: C.textDim }}>Enlem: </span>
               <span style={{ color: C.white, fontWeight: 700 }}>{selIl.lat.toFixed(2)}°N</span>
@@ -804,7 +804,7 @@ export default function HSMenzilHaritasi() {
         fontSize: 10, padding: "8px 12px", background: C.panel, borderRadius: 4,
         border: `1px solid ${C.border}`, fontFamily: FONT, color: C.textDim,
         display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4,
-      }}>
+      }} className="rg-2">
         <div><span style={{ color: C.green }}>{"●"}</span> Yeşil = Güdüm | <span style={{ color: C.amber }}>{"●"}</span> Amber = Takip | <span style={{ color: C.red }}>{"●"}</span> Kırmızı = Tespit</div>
         <div>Yükseklik verisi: Copernicus DEM GLO-90 (90m çözünürlük) · Open-Meteo API</div>
         <div>4/3 Dünya eğrilik modeli · Standart atmosfer kırılma faktörü</div>

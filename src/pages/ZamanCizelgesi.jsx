@@ -69,7 +69,7 @@ export default function ZamanCizelgesi() {
         </div>
       </Panel>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
+      <div className="rg-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
         {[
           { y: "2020", t: "Bahar Kalkanı", d: "KORAL, Pantsir-S1 radarlarını DRFM ile karıştırarak muharebe etkinliğini kanıtladı", c: C.hava },
           { y: "2025", t: "Polonya İhracatı", d: "410M€ — Avrupa'nın en büyük Türk savunma ihracatı sözleşmesi", c: C.amber },
@@ -84,7 +84,7 @@ export default function ZamanCizelgesi() {
       </div>
 
       <Panel title="EH İhracat Portföyü" glow={C.amber}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
+        <div className="rg-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
           {exportList.map((e,i) => (
             <div key={i} style={{ background: `${C.amber}08`, border: `1px solid ${C.amber}20`, borderRadius: 8, padding: "12px", textAlign: "center" }}>
               <div style={{ fontSize: 26 }}>{e.fl}</div>

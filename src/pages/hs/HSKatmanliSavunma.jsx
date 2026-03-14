@@ -511,7 +511,7 @@ export default function HSKatmanliSavunma() {
     <div style={{ display: "flex", flexDirection: "column", gap: 10, animation: "fadeUp 0.35s ease-out" }}>
 
       {/* ── Steel Dome Statistics ─────────────────────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
+      <div className="rg-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
         {stats.map((s, i) => (
           <Panel key={i} glow={s.color}>
             <div style={{ textAlign: "center", padding: "8px 4px" }}>
@@ -548,14 +548,14 @@ export default function HSKatmanliSavunma() {
       </Panel>
 
       {/* ── Sistem Mimarisi (Batarya Yapıları) ─────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
         {batteryArchitectures.map(arch => (
           <BatteryArchCard key={arch.id} arch={arch} />
         ))}
       </div>
 
       {/* ── System Cards per Layer ────────────────────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
         {layers.map((layer, i) => (
           <Panel
             key={i}
@@ -582,7 +582,7 @@ export default function HSKatmanliSavunma() {
         sub="Sensörden effektöre kadar komuta-kontrol veri akışı"
         glow={C.cyan}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
+        <div className="rg-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
           {/* Sensors */}
           <div>
             <div style={{ fontSize: 12, fontWeight: 900, color: C.purple, letterSpacing: 1.5, marginBottom: 8, fontFamily: FONT, textTransform: "uppercase" }}>

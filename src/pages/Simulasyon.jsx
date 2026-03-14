@@ -128,7 +128,7 @@ export default function Simulasyon() {
   return (
     <div style={{ animation: "fadeUp 0.35s ease-out" }}>
       <div style={{ fontSize: 11, color: C.textDim, marginBottom: 8, fontFamily: FONT }}>Scroll: Yakınlaştır | Sürükle: Kaydır | Çift tık: Sıfırla | Nokta tıkla: Odaklan</div>
-      <div style={{ display: "grid", gridTemplateColumns: "240px 1fr", gap: 10 }}>
+      <div className="rg-sim" style={{ display: "grid", gridTemplateColumns: "240px 1fr", gap: 10 }}>
         {/* Left panel */}
         <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: "calc(100vh - 140px)", overflowY: "auto" }}>
           <Panel title="İL SEÇİMİ" glow={C.cyan}>
@@ -171,7 +171,7 @@ export default function Simulasyon() {
             ))}
           </Panel>
           {mDep && <Panel title={`${mDep.name}`} glow={C.amber}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4, marginBottom: 6 }}>
+            <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4, marginBottom: 6 }}>
               {[{l:"RAKIM",v:`${mDep.e}m`,c:C.cyan},{l:"ARAZİ",v:mDep.t.toUpperCase(),c:C.amber},{l:"FAKTÖR",v:`x${(mTf*mEf).toFixed(2)}`,c:C.green},{l:"SİSTEM",v:mDep.sys.length,c:C.purple}].map((x,i) => (
                   <div key={i} style={{ background: `${x.c}08`, border: `1px solid ${x.c}20`, borderRadius: 4, padding: "4px 6px", textAlign: "center" }}>
                     <div style={{ fontSize: 9, color: C.textDim, fontFamily: FONT }}>{x.l}</div>
@@ -219,7 +219,7 @@ export default function Simulasyon() {
           <div style={{ position: "absolute", bottom: 12, left: 10, background: `${C.panel}cc`, padding: "3px 8px", borderRadius: 4, fontSize: 11, color: C.textDim, fontFamily: MONO, border: `1px solid ${C.border}` }}>{mZoom.toFixed(1)}x</div>
         </div>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, fontSize: 11, marginTop: 10, padding: "10px 12px", background: C.panel, borderRadius: 6, border: `1px solid ${C.border}`, fontFamily: FONT }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, fontSize: 11, marginTop: 10, padding: "10px 12px", background: C.panel, borderRadius: 6, border: `1px solid ${C.border}`, fontFamily: FONT }}>
         <div><span style={{ color: C.red }}>{"━"}</span> ET (Taarruz) | <span style={{ color: C.cyan }}>{"╤╤"}</span> ED (Tespit)</div>
         <div>Ova x1.0 | Kıyı x1.12 | Plato x0.9 | Dağlık x0.6</div>
         <div>İl: <span style={{ color: "#9a7050" }}>{"●"}</span>&gt;1500m <span style={{ color: "#7a8a60" }}>{"●"}</span>&gt;800m <span style={{ color: "#5a7a9a" }}>{"●"}</span>&lt;800m</div>

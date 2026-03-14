@@ -94,7 +94,7 @@ export default function HSZamanCizelgesi() {
         </div>
       </Panel>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
+      <div className="rg-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
         {[
           { y: "2021", t: "HİSAR-A+ Envanter", d: "Türkiye'nin ilk yerli SAM sistemi envantere girdi", c: C.kara },
           { y: "2025", t: "Çelik Kubbe Teslimat", d: "47 parça, $460M ilk entegre teslimat", c: C.amber },

@@ -105,7 +105,7 @@ export default function SenaryoMerkezi() {
             <div style={{ fontSize: 13, color: C.text, lineHeight: 1.7, fontFamily: FONT }}>{s.flow}</div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
+          <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
             <div>
               <div style={{ fontSize: 11, color: s.color, fontWeight: 700, letterSpacing: 1.5, marginBottom: 8, fontFamily: FONT }}>BİRİNCİL SİSTEMLER</div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
